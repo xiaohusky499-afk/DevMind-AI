@@ -1,0 +1,12 @@
+route:
+  receiver: devmind-webhook
+  group_by: [alertname]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  - name: devmind-webhook
+    webhook_configs:
+      - url: https://replace-with-internal-alert-webhook.example.com/devmind
+        send_resolved: true

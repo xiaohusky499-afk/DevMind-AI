@@ -1,0 +1,608 @@
+{
+  "knowledge_base_id": "cae2c07c-d192-4b90-90f2-f51da1a5b8ef",
+  "levels": [
+    {
+      "concurrency": 20,
+      "success_count": 20,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "throughput_rps": 0.06861552532291972,
+      "wall_seconds": 291.47922290000133,
+      "latency_ms": {
+        "p50": 142220,
+        "p95": 273742,
+        "max": 291477
+      },
+      "first_token_ms": {
+        "p50": 137371,
+        "p95": 272074
+      },
+      "resources": {
+        "cpu_percent_max": 1325.0,
+        "memory_mb_max": 3951.6796875
+      },
+      "requests": [
+        {
+          "id": "tech_001",
+          "ok": true,
+          "latency_ms": 142220,
+          "first_token_ms": 137371,
+          "usage": {
+            "input_tokens": 602,
+            "output_tokens": 216,
+            "retrieval_run_id": "9a71798b-6979-43c8-a506-001a195144b1",
+            "latency_ms": 135702,
+            "confidence_score": 0.572304,
+            "confidence_reason": "limited_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 12,
+              "rewrite_ms": 0,
+              "search_ms": 25192,
+              "embedding_ms": 2616,
+              "milvus_ms": 6,
+              "rerank_input_count": 3,
+              "rerank_ms": 110499,
+              "retrieval_ms": 135702,
+              "citation_persistence_ms": 9,
+              "llm_first_token_ms": 521,
+              "llm_total_ms": 5346,
+              "answer_total_ms": 141083
+            }
+          }
+        },
+        {
+          "id": "tech_002",
+          "ok": true,
+          "latency_ms": 260847,
+          "first_token_ms": 256981,
+          "usage": {
+            "input_tokens": 603,
+            "output_tokens": 174,
+            "retrieval_run_id": "7c0369e3-6273-4235-bb58-6d8da0b9ac8d",
+            "latency_ms": 255157,
+            "confidence_score": 0.720895,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 4,
+              "rewrite_ms": 0,
+              "search_ms": 30386,
+              "embedding_ms": 569,
+              "milvus_ms": 6,
+              "rerank_input_count": 3,
+              "rerank_ms": 224767,
+              "retrieval_ms": 255157,
+              "citation_persistence_ms": 9,
+              "llm_first_token_ms": 666,
+              "llm_total_ms": 4508,
+              "answer_total_ms": 259695
+            }
+          }
+        },
+        {
+          "id": "tech_003",
+          "ok": true,
+          "latency_ms": 157735,
+          "first_token_ms": 152419,
+          "usage": {
+            "input_tokens": 771,
+            "output_tokens": 243,
+            "retrieval_run_id": "82965bc3-be28-4cb7-a973-4e22285fbdec",
+            "latency_ms": 150667,
+            "confidence_score": 0.781351,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 11,
+              "rewrite_ms": 0,
+              "search_ms": 26325,
+              "embedding_ms": 1093,
+              "milvus_ms": 39,
+              "rerank_input_count": 3,
+              "rerank_ms": 124331,
+              "retrieval_ms": 150667,
+              "citation_persistence_ms": 9,
+              "llm_first_token_ms": 604,
+              "llm_total_ms": 5910,
+              "answer_total_ms": 156608
+            }
+          }
+        },
+        {
+          "id": "tech_004",
+          "ok": true,
+          "latency_ms": 43510,
+          "first_token_ms": 39191,
+          "usage": {
+            "input_tokens": 1363,
+            "output_tokens": 284,
+            "retrieval_run_id": "947f4abe-8927-4d4b-b2e1-b980728161fc",
+            "latency_ms": 37292,
+            "confidence_score": 0.887155,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 12,
+              "rewrite_ms": 0,
+              "search_ms": 6023,
+              "embedding_ms": 2786,
+              "milvus_ms": 13,
+              "rerank_input_count": 3,
+              "rerank_ms": 31258,
+              "retrieval_ms": 37292,
+              "citation_persistence_ms": 16,
+              "llm_first_token_ms": 757,
+              "llm_total_ms": 5050,
+              "answer_total_ms": 42384
+            }
+          }
+        },
+        {
+          "id": "tech_005",
+          "ok": true,
+          "latency_ms": 108764,
+          "first_token_ms": 107324,
+          "usage": {
+            "input_tokens": 713,
+            "output_tokens": 95,
+            "retrieval_run_id": "97ed8a2c-2875-47fc-8f3e-08bc0d8b0a60",
+            "latency_ms": 105533,
+            "confidence_score": 0.741118,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 13,
+              "rewrite_ms": 0,
+              "search_ms": 19909,
+              "embedding_ms": 2791,
+              "milvus_ms": 13,
+              "rerank_input_count": 3,
+              "rerank_ms": 85612,
+              "retrieval_ms": 105533,
+              "citation_persistence_ms": 12,
+              "llm_first_token_ms": 644,
+              "llm_total_ms": 2060,
+              "answer_total_ms": 107625
+            }
+          }
+        },
+        {
+          "id": "tech_006",
+          "ok": true,
+          "latency_ms": 169101,
+          "first_token_ms": 167406,
+          "usage": {
+            "input_tokens": 966,
+            "output_tokens": 75,
+            "retrieval_run_id": "1c0a1091-165b-46cd-8520-516be6bdd680",
+            "latency_ms": 165707,
+            "confidence_score": 0.797469,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 7,
+              "rewrite_ms": 0,
+              "search_ms": 26761,
+              "embedding_ms": 430,
+              "milvus_ms": 9,
+              "rerank_input_count": 3,
+              "rerank_ms": 138940,
+              "retrieval_ms": 165707,
+              "citation_persistence_ms": 9,
+              "llm_first_token_ms": 548,
+              "llm_total_ms": 2223,
+              "answer_total_ms": 167956
+            }
+          }
+        },
+        {
+          "id": "tech_007",
+          "ok": true,
+          "latency_ms": 51421,
+          "first_token_ms": 49345,
+          "usage": {
+            "input_tokens": 712,
+            "output_tokens": 93,
+            "retrieval_run_id": "453829ae-a3f0-448e-be24-36e544496df8",
+            "latency_ms": 47562,
+            "confidence_score": 0.789335,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 13,
+              "rewrite_ms": 0,
+              "search_ms": 8670,
+              "embedding_ms": 2646,
+              "milvus_ms": 5,
+              "rerank_input_count": 3,
+              "rerank_ms": 38880,
+              "retrieval_ms": 47562,
+              "citation_persistence_ms": 10,
+              "llm_first_token_ms": 652,
+              "llm_total_ms": 2702,
+              "answer_total_ms": 50292
+            }
+          }
+        },
+        {
+          "id": "tech_008",
+          "ok": true,
+          "latency_ms": 228138,
+          "first_token_ms": 226984,
+          "usage": {
+            "input_tokens": 716,
+            "output_tokens": 52,
+            "retrieval_run_id": "a593429c-4959-4414-9b54-53a525d4d072",
+            "latency_ms": 225223,
+            "confidence_score": 0.562977,
+            "confidence_reason": "limited_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 4,
+              "rewrite_ms": 0,
+              "search_ms": 29222,
+              "embedding_ms": 808,
+              "milvus_ms": 11,
+              "rerank_input_count": 3,
+              "rerank_ms": 195998,
+              "retrieval_ms": 225223,
+              "citation_persistence_ms": 10,
+              "llm_first_token_ms": 601,
+              "llm_total_ms": 1734,
+              "answer_total_ms": 226988
+            }
+          }
+        },
+        {
+          "id": "tech_009",
+          "ok": true,
+          "latency_ms": 34248,
+          "first_token_ms": 32271,
+          "usage": {
+            "input_tokens": 714,
+            "output_tokens": 84,
+            "retrieval_run_id": "7c8f7969-e13b-4bd3-95d8-906ca65eb620",
+            "latency_ms": 30123,
+            "confidence_score": 0.788201,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 11,
+              "rewrite_ms": 0,
+              "search_ms": 3229,
+              "embedding_ms": 2794,
+              "milvus_ms": 10,
+              "rerank_input_count": 3,
+              "rerank_ms": 26884,
+              "retrieval_ms": 30123,
+              "citation_persistence_ms": 23,
+              "llm_first_token_ms": 1004,
+              "llm_total_ms": 2936,
+              "answer_total_ms": 33111
+            }
+          }
+        },
+        {
+          "id": "tech_010",
+          "ok": true,
+          "latency_ms": 98841,
+          "first_token_ms": 93894,
+          "usage": {
+            "input_tokens": 770,
+            "output_tokens": 231,
+            "retrieval_run_id": "9d5348b6-1198-4944-8bab-5d38e29037ff",
+            "latency_ms": 92019,
+            "confidence_score": 0.774867,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 14,
+              "rewrite_ms": 0,
+              "search_ms": 17104,
+              "embedding_ms": 2869,
+              "milvus_ms": 13,
+              "rerank_input_count": 3,
+              "rerank_ms": 74902,
+              "retrieval_ms": 92019,
+              "citation_persistence_ms": 23,
+              "llm_first_token_ms": 712,
+              "llm_total_ms": 5639,
+              "answer_total_ms": 97711
+            }
+          }
+        },
+        {
+          "id": "access_001",
+          "ok": true,
+          "latency_ms": 199421,
+          "first_token_ms": 197466,
+          "usage": {
+            "input_tokens": 997,
+            "output_tokens": 88,
+            "retrieval_run_id": "81c43a51-6780-4a1c-b8a2-8736b09fd9c0",
+            "latency_ms": 195527,
+            "confidence_score": 0.891553,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 5,
+              "rewrite_ms": 0,
+              "search_ms": 27759,
+              "embedding_ms": 546,
+              "milvus_ms": 7,
+              "rerank_input_count": 3,
+              "rerank_ms": 167764,
+              "retrieval_ms": 195527,
+              "citation_persistence_ms": 11,
+              "llm_first_token_ms": 782,
+              "llm_total_ms": 2718,
+              "answer_total_ms": 198277
+            }
+          }
+        },
+        {
+          "id": "access_002",
+          "ok": true,
+          "latency_ms": 65513,
+          "first_token_ms": 64800,
+          "usage": {
+            "input_tokens": 757,
+            "output_tokens": 44,
+            "retrieval_run_id": "34e4b939-aa28-44cf-9f9c-4f91fa39996c",
+            "latency_ms": 62984,
+            "confidence_score": 0.7577,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 14,
+              "rewrite_ms": 0,
+              "search_ms": 11421,
+              "embedding_ms": 2748,
+              "milvus_ms": 9,
+              "rerank_input_count": 3,
+              "rerank_ms": 51550,
+              "retrieval_ms": 62984,
+              "citation_persistence_ms": 10,
+              "llm_first_token_ms": 675,
+              "llm_total_ms": 1368,
+              "answer_total_ms": 64386
+            }
+          }
+        },
+        {
+          "id": "access_003",
+          "ok": true,
+          "latency_ms": 80845,
+          "first_token_ms": 80097,
+          "usage": {
+            "input_tokens": 996,
+            "output_tokens": 32,
+            "retrieval_run_id": "58ca7374-c37b-458e-a9d0-0bf3cef0e5f8",
+            "latency_ms": 78372,
+            "confidence_score": 0.140194,
+            "confidence_reason": "limited_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 13,
+              "rewrite_ms": 0,
+              "search_ms": 14222,
+              "embedding_ms": 2795,
+              "milvus_ms": 6,
+              "rerank_input_count": 3,
+              "rerank_ms": 64138,
+              "retrieval_ms": 78372,
+              "citation_persistence_ms": 11,
+              "llm_first_token_ms": 575,
+              "llm_total_ms": 1302,
+              "answer_total_ms": 79712
+            }
+          }
+        },
+        {
+          "id": "access_004",
+          "ok": true,
+          "latency_ms": 213375,
+          "first_token_ms": 212090,
+          "usage": {
+            "input_tokens": 998,
+            "output_tokens": 57,
+            "retrieval_run_id": "8bbee2ed-bfe9-4d3b-b560-240fb4880788",
+            "latency_ms": 210381,
+            "confidence_score": 0.541526,
+            "confidence_reason": "limited_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 4,
+              "rewrite_ms": 0,
+              "search_ms": 28402,
+              "embedding_ms": 632,
+              "milvus_ms": 10,
+              "rerank_input_count": 3,
+              "rerank_ms": 181976,
+              "retrieval_ms": 210381,
+              "citation_persistence_ms": 10,
+              "llm_first_token_ms": 549,
+              "llm_total_ms": 1815,
+              "answer_total_ms": 212227
+            }
+          }
+        },
+        {
+          "id": "access_005",
+          "ok": true,
+          "latency_ms": 242931,
+          "first_token_ms": 241911,
+          "usage": {
+            "input_tokens": 755,
+            "output_tokens": 45,
+            "retrieval_run_id": "93cafdcd-d65e-4c31-ace6-615838d836dc",
+            "latency_ms": 240201,
+            "confidence_score": 0.47714,
+            "confidence_reason": "limited_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 3,
+              "rewrite_ms": 0,
+              "search_ms": 29810,
+              "embedding_ms": 579,
+              "milvus_ms": 8,
+              "rerank_input_count": 3,
+              "rerank_ms": 210388,
+              "retrieval_ms": 240201,
+              "citation_persistence_ms": 11,
+              "llm_first_token_ms": 553,
+              "llm_total_ms": 1555,
+              "answer_total_ms": 241789
+            }
+          }
+        },
+        {
+          "id": "incident_001",
+          "ok": true,
+          "latency_ms": 182861,
+          "first_token_ms": 182247,
+          "usage": {
+            "input_tokens": 814,
+            "output_tokens": 25,
+            "retrieval_run_id": "80a5ac94-9731-4ef9-9742-b445d15eea1b",
+            "latency_ms": 180601,
+            "confidence_score": 0.782332,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 6,
+              "rewrite_ms": 0,
+              "search_ms": 27205,
+              "embedding_ms": 437,
+              "milvus_ms": 7,
+              "rerank_input_count": 3,
+              "rerank_ms": 153390,
+              "retrieval_ms": 180601,
+              "citation_persistence_ms": 11,
+              "llm_first_token_ms": 485,
+              "llm_total_ms": 1069,
+              "answer_total_ms": 181707
+            }
+          }
+        },
+        {
+          "id": "incident_002",
+          "ok": true,
+          "latency_ms": 19781,
+          "first_token_ms": 19005,
+          "usage": {
+            "input_tokens": 1071,
+            "output_tokens": 41,
+            "retrieval_run_id": "1d87f728-f869-44e0-85ab-01431d427176",
+            "latency_ms": 17044,
+            "confidence_score": 0.782346,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 6,
+              "rewrite_ms": 0,
+              "search_ms": 456,
+              "embedding_ms": 451,
+              "milvus_ms": 4,
+              "rerank_input_count": 3,
+              "rerank_ms": 16582,
+              "retrieval_ms": 17044,
+              "citation_persistence_ms": 98,
+              "llm_first_token_ms": 766,
+              "llm_total_ms": 1522,
+              "answer_total_ms": 18697
+            }
+          }
+        },
+        {
+          "id": "incident_003",
+          "ok": true,
+          "latency_ms": 124073,
+          "first_token_ms": 122336,
+          "usage": {
+            "input_tokens": 812,
+            "output_tokens": 79,
+            "retrieval_run_id": "73cfb67c-6633-48f6-a81f-347d1f8dd80f",
+            "latency_ms": 120596,
+            "confidence_score": 0.783259,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 13,
+              "rewrite_ms": 0,
+              "search_ms": 22569,
+              "embedding_ms": 2648,
+              "milvus_ms": 12,
+              "rerank_input_count": 3,
+              "rerank_ms": 98014,
+              "retrieval_ms": 120596,
+              "citation_persistence_ms": 11,
+              "llm_first_token_ms": 594,
+              "llm_total_ms": 2322,
+              "answer_total_ms": 122949
+            }
+          }
+        },
+        {
+          "id": "incident_004",
+          "ok": true,
+          "latency_ms": 291477,
+          "first_token_ms": 286694,
+          "usage": {
+            "input_tokens": 1070,
+            "output_tokens": 216,
+            "retrieval_run_id": "0592bb39-52b5-4f0d-9b7a-6e6f4f71f1f7",
+            "latency_ms": 285009,
+            "confidence_score": 0.806621,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 2,
+            "timings": {
+              "access_ms": 3,
+              "rewrite_ms": 0,
+              "search_ms": 31547,
+              "embedding_ms": 510,
+              "milvus_ms": 9,
+              "rerank_input_count": 3,
+              "rerank_ms": 253460,
+              "retrieval_ms": 285009,
+              "citation_persistence_ms": 8,
+              "llm_first_token_ms": 537,
+              "llm_total_ms": 5308,
+              "answer_total_ms": 290339
+            }
+          }
+        },
+        {
+          "id": "incident_005",
+          "ok": true,
+          "latency_ms": 273742,
+          "first_token_ms": 272074,
+          "usage": {
+            "input_tokens": 480,
+            "output_tokens": 74,
+            "retrieval_run_id": "b0627fa2-81d4-480e-8cd9-70d3c6a32452",
+            "latency_ms": 270106,
+            "confidence_score": 0.747102,
+            "confidence_reason": "strong_evidence",
+            "evidence_count": 1,
+            "timings": {
+              "access_ms": 3,
+              "rewrite_ms": 0,
+              "search_ms": 31028,
+              "embedding_ms": 632,
+              "milvus_ms": 8,
+              "rerank_input_count": 3,
+              "rerank_ms": 239074,
+              "retrieval_ms": 270106,
+              "citation_persistence_ms": 10,
+              "llm_first_token_ms": 807,
+              "llm_total_ms": 2456,
+              "answer_total_ms": 272593
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# 该文件已废弃：服务已合并到 docker/docker-compose.yml
+# 请使用：
+#   cd docker
+#   docker compose up -d

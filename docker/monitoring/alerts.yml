@@ -1,0 +1,60 @@
+groups:
+  - name: devmind-availability
+    rules:
+      - alert: DevMindBackendDown
+        expr: up{job="devmind-backend"} == 0
+        for: 2m
+        labels: {severity: critical}
+        annotations:
+          summary: DevMind AI 后端不可用
+          description: Prometheus 连续 2 分钟无法采集后端指标。
+
+      - alert: DevMindHighServerErrorRate
+        expr: sum(rate(devmind_http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(devmind_http_requests_total[5m])), 0.001) > 0.05
+        for: 10m
+        labels: {severity: critical}
+        annotations:
+          summary: DevMind AI 服务端错误率过高
+          description: 最近 10 分钟 HTTP 5xx 比例持续超过 5%。
+
+      - alert: DevMindHighRequestLatency
+        expr: histogram_quantile(0.95, sum by (le) (rate(devmind_http_request_duration_seconds_bucket[5m]))) > 5
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: DevMind AI 接口延迟过高
+          description: 最近 10 分钟 HTTP P95 延迟持续超过 5 秒。
+
+  - name: devmind-rag-worker
+    rules:
+      - alert: DevMindDocumentDeadLetter
+        expr: devmind_document_tasks{status="dead"} > 0
+        for: 5m
+        labels: {severity: critical}
+        annotations:
+          summary: 文档任务进入死信状态
+          description: 存在耗尽重试次数的文档任务，需要人工处理。
+
+      - alert: DevMindDocumentWorkerStaleTask
+        expr: devmind_document_stale_tasks > 0
+        for: 3m
+        labels: {severity: warning}
+        annotations:
+          summary: 文档 Worker 可能失联
+          description: 存在租约过期但仍标记为运行中的任务。
+
+      - alert: DevMindRagFailures
+        expr: devmind_rag_failed_answers_15m >= 5
+        for: 5m
+        labels: {severity: warning}
+        annotations:
+          summary: RAG 回答连续失败
+          description: 最近 15 分钟至少有 5 个 AI 回答失败。
+
+      - alert: DevMindMetricsCollectionFailure
+        expr: devmind_metrics_collection_error == 1
+        for: 3m
+        labels: {severity: critical}
+        annotations:
+          summary: 业务指标采集失败
+          description: 后端无法从 PostgreSQL 汇总 Worker 或 RAG 状态。

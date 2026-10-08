@@ -1,0 +1,2341 @@
+{
+  "version": "1.0.0",
+  "knowledge_base_id": "cae2c07c-d192-4b90-90f2-f51da1a5b8ef",
+  "summary": {
+    "case_count": 40,
+    "answerable_count": 34,
+    "unanswerable_count": 6,
+    "answerable_answer_rate": 0.9705882352941176,
+    "unanswerable_refusal_rate": 1.0,
+    "citation_trace_rate": 1.0,
+    "citation_source_precision": 0.9696969696969697,
+    "answer_term_coverage": 0.8611111111111112,
+    "high_confidence_precision": 0.9583333333333334,
+    "confidence_distribution": {
+      "high": 24,
+      "medium": 9,
+      "low": 7
+    },
+    "latency_ms": {
+      "mean": 13961.475,
+      "max": 23156
+    }
+  },
+  "cases": [
+    {
+      "id": "tech_001",
+      "query": "Python 项目第一次拉下来后如何初始化环境？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "uv sync",
+        "项目根目录"
+      ],
+      "difficulty": "easy",
+      "session_id": "5825c6bc-a200-4a2c-9e83-3886aa76bb97",
+      "assistant_message_id": "f401802b-6db3-41ad-80f9-53a04ac258ac",
+      "answer": "Python 项目第一次拉下来后，初始化环境的推荐方式是使用 `uv` 工具同步依赖：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n若项目不支持或未配置 `uv`，则使用标准 `venv` 方式：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate  # Windows\n# 或 .venv/bin/activate  # macOS/Linux\npip install -r requirements.txt\n```\n\n注意：依赖安装慢时，应优先配置公司内网 PyPI 镜像源 [来源: tech.md, 第 1 页]。  \n⚠️ 生产环境部署或 CI 流水线中涉及环境初始化的操作，须遵循《发布管理规范 V2.3》中的审批与验证流程（该规范不在当前知识库中，需转人工确认）。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 186,
+        "retrieval_run_id": "40457866-ed37-4d82-9f8f-5bc8578fa120",
+        "latency_ms": 15590,
+        "confidence_score": 0.572304,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 236,
+          "embedding_ms": 229,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 15352,
+          "retrieval_ms": 15590,
+          "citation_persistence_ms": 10,
+          "llm_first_token_ms": 685,
+          "llm_total_ms": 4788,
+          "answer_total_ms": 20403
+        }
+      },
+      "citations": [
+        {
+          "id": "bf396f6d-f618-4b02-845f-716c49e33c26",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1c029631-1cd9-4918-8e5b-77da06556019",
+          "score": 0.71538,
+          "excerpt": "---\ntitle: 研发技术咨询高频问题与排查手册\ncategory: tech\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 研发技术咨询高频问题与排查手册\n\n本手册面向研发、测试、运维人员，覆盖环境安装、依赖配置、常见报错、接口调试和部署发布等高频技术问题。\n\n## 一、环境安装与依赖配置\n\n### 1. Python 项目环境初始化\n\n使用 uv 管理 Python 依赖的推荐步骤：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n不使用 uv 时，使用 venv：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements.txt\n```\n\n常见问题：依赖安装慢时，优先配置公司内网 PyPI 镜像源。\n\n### 2. Java / Maven 项目配置\n\n- JDK 版本以项目根目录 `.java-version` 或 `pom.xml` 为准。\n- Maven 私服地址统一配置在 `~/.m2/settings.xml` 的 `mirrors` 节点中。\n- 常见错误：`Could not transfer artifact`，通常表示私服地址不可达或账号无权限。\n\n### 3. Node / npm 项目配置\n\n- 前端项目统一使用 npm。\n- 首次运行执行 `npm install`，如果出现依赖冲突，删除 `node_modules` 和 `package-lock.json` 后重新安装。\n- 公司内网优先使用内部 npm registry。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 20469
+    },
+    {
+      "id": "tech_002",
+      "query": "Maven 提示 Could not transfer artifact 应检查什么？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "私服地址",
+        "账号无权限"
+      ],
+      "difficulty": "easy",
+      "session_id": "7c26213a-f7c4-491b-9fda-9be69ac88ffc",
+      "assistant_message_id": "e22560c2-afb1-48d7-b2cf-8416b790756e",
+      "answer": "Maven 提示 `Could not transfer artifact` 时，应检查以下两项：\n\n1. Maven 私服地址是否可达：确认 `~/.m2/settings.xml` 中 `mirrors` 节点配置的私服地址网络连通且服务正常 [来源: tech.md, 第 1 页]；  \n2. 当前账号是否具备对应仓库的访问权限：该错误常见于账号无权限访问所配置的私服 [来源: tech.md, 第 1 页]。\n\n⚠️ 注意：涉及私服权限调整或网络连通性验证等操作，须通过 IT 服务台提交工单并遵循《生产环境变更管理流程》审批 [来源: tech.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 157,
+        "retrieval_run_id": "8f98f70d-f7b5-4d60-9130-6557262164ad",
+        "latency_ms": 15795,
+        "confidence_score": 0.720895,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 370,
+          "embedding_ms": 365,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15423,
+          "retrieval_ms": 15795,
+          "citation_persistence_ms": 7,
+          "llm_first_token_ms": 679,
+          "llm_total_ms": 4127,
+          "answer_total_ms": 19946
+        }
+      },
+      "citations": [
+        {
+          "id": "5e718c2b-4782-4c0a-bb59-9d7f7f5de522",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1c029631-1cd9-4918-8e5b-77da06556019",
+          "score": 0.90112,
+          "excerpt": "---\ntitle: 研发技术咨询高频问题与排查手册\ncategory: tech\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 研发技术咨询高频问题与排查手册\n\n本手册面向研发、测试、运维人员，覆盖环境安装、依赖配置、常见报错、接口调试和部署发布等高频技术问题。\n\n## 一、环境安装与依赖配置\n\n### 1. Python 项目环境初始化\n\n使用 uv 管理 Python 依赖的推荐步骤：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n不使用 uv 时，使用 venv：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements.txt\n```\n\n常见问题：依赖安装慢时，优先配置公司内网 PyPI 镜像源。\n\n### 2. Java / Maven 项目配置\n\n- JDK 版本以项目根目录 `.java-version` 或 `pom.xml` 为准。\n- Maven 私服地址统一配置在 `~/.m2/settings.xml` 的 `mirrors` 节点中。\n- 常见错误：`Could not transfer artifact`，通常表示私服地址不可达或账号无权限。\n\n### 3. Node / npm 项目配置\n\n- 前端项目统一使用 npm。\n- 首次运行执行 `npm install`，如果出现依赖冲突，删除 `node_modules` 和 `package-lock.json` 后重新安装。\n- 公司内网优先使用内部 npm registry。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 19985
+    },
+    {
+      "id": "tech_003",
+      "query": "Git 推送出现 Permission denied publickey 怎么排查？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "SSH key",
+        "ssh -T"
+      ],
+      "difficulty": "easy",
+      "session_id": "ccaeaf38-e2f5-46b1-b90b-e9c34252572a",
+      "assistant_message_id": "92fb75b1-a6dd-4171-abe4-f337de7058ad",
+      "answer": "Git 推送出现 `Permission denied (publickey)` 的排查步骤如下：\n\n1. 确认本机已生成 SSH key：执行 `ssh-keygen -t rsa -b 4096` [来源: tech.md, 第 1 页]。  \n2. 将生成的公钥（默认为 `~/.ssh/id_rsa.pub`）添加到 GitLab / GitHub 账号的 SSH Keys 设置中 [来源: tech.md, 第 1 页]。  \n3. 使用 `ssh -T git@内部git地址` 测试 SSH 连通性 [来源: tech.md, 第 1 页]。  \n4. 确认远程仓库地址使用的是 SSH 协议（如 `git@内部git地址:group/repo.git`），而非 HTTPS 协议 [来源: tech.md, 第 1 页]。\n\n⚠️ 注意：涉及生产环境代码推送，请确保已通过代码评审流程，并遵守《研发代码管理规范》中的分支策略与发布审批要求（该规范未在当前参考文档中提供具体内容，操作前请确认已获相应权限）。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 771,
+        "output_tokens": 243,
+        "retrieval_run_id": "fbbcb9e0-87c0-4806-9ebb-4a75f36f4e10",
+        "latency_ms": 16188,
+        "confidence_score": 0.781351,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 417,
+          "embedding_ms": 411,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15771,
+          "retrieval_ms": 16188,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 623,
+          "llm_total_ms": 5950,
+          "answer_total_ms": 22160
+        }
+      },
+      "citations": [
+        {
+          "id": "d65b1853-3bb5-457d-a393-0505865b004d",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.97669,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 22203
+    },
+    {
+      "id": "tech_004",
+      "query": "接口返回 503 Service Unavailable 时应该怎么排查？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "上游服务",
+        "健康检查",
+        "网关日志"
+      ],
+      "difficulty": "easy",
+      "session_id": "5c605a41-3c7f-41e4-acbb-f2e21fcc7946",
+      "assistant_message_id": "5cf6509a-3b3b-4d3a-825b-f5ef361339c8",
+      "answer": "接口返回 `503 Service Unavailable` 时，应按以下顺序排查：\n\n1. **先检查服务健康状态**：确认上游服务是否已启动、是否通过健康检查（如 `/actuator/health`）[来源: tech.md, 第 1 页]。  \n2. **查看网关或负载均衡日志**：确认是否有可用后端节点，是否存在节点被摘除或未注册情况 [来源: tech.md, 第 1 页]。  \n3. **检查服务自身日志**：重点关注线程池是否打满、JVM 是否 OOM、是否存在大量阻塞或超时请求 [来源: tech.md, 第 1 页]。  \n4. **确认当前是否处于发布或重启窗口**：503 常见于服务正在滚动更新、实例尚未就绪或刚下线 [来源: tech.md, 第 1 页]。  \n\n⚠️ 若该问题影响核心业务且持续存在，请立即按《故障上报与应急响应规范》进行分级上报；若判断为 P0 或 P1 级故障，须在 5 分钟或 15 分钟内响应，并评估是否需紧急回滚 [来源: incident.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1363,
+        "output_tokens": 273,
+        "retrieval_run_id": "e84f5712-5130-4196-a922-5fd06ad511b8",
+        "latency_ms": 14172,
+        "confidence_score": 0.887155,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 418,
+          "embedding_ms": 413,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 13753,
+          "retrieval_ms": 14172,
+          "citation_persistence_ms": 16,
+          "llm_first_token_ms": 539,
+          "llm_total_ms": 6577,
+          "answer_total_ms": 20786
+        }
+      },
+      "citations": [
+        {
+          "id": "d6864d0c-4f4b-4075-b127-54ee67341130",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.99449,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        },
+        {
+          "id": "447c2d72-c90d-4d48-8052-492fdbefc487",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.91561,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 0.5,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 20813
+    },
+    {
+      "id": "tech_005",
+      "query": "接口请求超时的排查顺序是什么？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "服务端是否收到请求",
+        "数据库慢查询",
+        "上游接口"
+      ],
+      "difficulty": "medium",
+      "session_id": "738d3bfa-4d63-4f70-8641-3b8bed8f8bc9",
+      "assistant_message_id": "a34527a0-3641-4d09-be78-8766814e3d38",
+      "answer": "接口请求超时的排查顺序如下：\n\n1. 确认服务端是否收到请求；  \n2. 查看服务日志中的耗时情况；  \n3. 检查数据库是否存在慢查询；  \n4. 检查 Redis 连接情况；  \n5. 检查上游接口的响应时间。  \n\n以上步骤需逐段定位耗时原因 [来源: tech.md, 第 5 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 713,
+        "output_tokens": 95,
+        "retrieval_run_id": "a7e24f5f-4f0d-4fae-bd64-b01b6f83ed40",
+        "latency_ms": 6126,
+        "confidence_score": 0.741118,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 200,
+          "embedding_ms": 193,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5926,
+          "retrieval_ms": 6126,
+          "citation_persistence_ms": 14,
+          "llm_first_token_ms": 609,
+          "llm_total_ms": 2729,
+          "answer_total_ms": 8886
+        }
+      },
+      "citations": [
+        {
+          "id": "3679965a-6c49-41b7-b01a-49a112e6c043",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.9264,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 8922
+    },
+    {
+      "id": "tech_006",
+      "query": "数据库慢查询应该如何处理？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "慢查询日志",
+        "EXPLAIN",
+        "索引"
+      ],
+      "difficulty": "easy",
+      "session_id": "1ee47ee8-1e9f-4fcd-b2d6-b199de7807ef",
+      "assistant_message_id": "1a941d4b-1094-4220-8ebb-41e70faeefdd",
+      "answer": "数据库慢查询应按以下步骤处理：\n\n1. 开启慢查询日志，定位执行时间最长的 SQL 语句；  \n2. 使用 `EXPLAIN` 分析该 SQL 的执行计划；  \n3. 根据分析结果确认是否缺少索引；  \n4. 最后通过优化 SQL 语句或添加合适索引进行修复 [来源: tech.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 966,
+        "output_tokens": 89,
+        "retrieval_run_id": "a74dec10-0b52-4ff9-a46b-8aad7920cd06",
+        "latency_ms": 6048,
+        "confidence_score": 0.797469,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 240,
+          "embedding_ms": 232,
+          "milvus_ms": 7,
+          "rerank_input_count": 3,
+          "rerank_ms": 5807,
+          "retrieval_ms": 6048,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 572,
+          "llm_total_ms": 2559,
+          "answer_total_ms": 8637
+        }
+      },
+      "citations": [
+        {
+          "id": "0fd27a61-4dcd-4d95-96ed-360f0435d3db",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.93986,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        },
+        {
+          "id": "38b70a0f-95f3-4a75-92cd-e5819647544d",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.45579,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 0.5,
+      "term_coverage": 1.0,
+      "latency_ms": 8672
+    },
+    {
+      "id": "tech_007",
+      "query": "Redis 连接超时常见原因有哪些？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "Redis 未启动",
+        "端口",
+        "连接数"
+      ],
+      "difficulty": "easy",
+      "session_id": "e7ec318c-5d64-4a25-a5d7-ee43015dcc1a",
+      "assistant_message_id": "06e3b47c-eb68-4e3c-a4ee-b5f0f906f96e",
+      "answer": "Redis 连接超时的常见原因包括：Redis 未启动、端口不通、密码错误、连接数打满、网络抖动 [来源: tech.md, 第 5 页]。  \n建议首先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性，以快速验证基础连接状态 [来源: tech.md, 第 5 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 712,
+        "output_tokens": 91,
+        "retrieval_run_id": "8847c566-136e-495f-895f-df7a170f88ba",
+        "latency_ms": 6211,
+        "confidence_score": 0.789335,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 199,
+          "embedding_ms": 192,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6011,
+          "retrieval_ms": 6211,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 737,
+          "llm_total_ms": 2769,
+          "answer_total_ms": 9010
+        }
+      },
+      "citations": [
+        {
+          "id": "ca4c496f-d405-4f8d-a181-b448816b5b13",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.98667,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9031
+    },
+    {
+      "id": "tech_008",
+      "query": "前端请求后端出现跨域问题怎么处理？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "CORS",
+        "Vite",
+        "代理"
+      ],
+      "difficulty": "easy",
+      "session_id": "c5bb3805-af96-475d-bbb9-ed0b469edb75",
+      "assistant_message_id": "39a0a8cd-4f03-4b87-baa6-6bbac8fd6cee",
+      "answer": "后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务 [来源: tech.md, 第 5 页]。  \n注意：生产环境的 CORS 配置需严格遵循安全策略，禁止使用通配符 `*` 允许凭据（如 cookies），具体配置应按《安全开发规范》执行（该规范不在当前参考文档中，需另行查阅）。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 716,
+        "output_tokens": 97,
+        "retrieval_run_id": "7a3d37e3-65ec-4340-92c2-067048991a68",
+        "latency_ms": 6273,
+        "confidence_score": 0.562977,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 222,
+          "embedding_ms": 216,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6050,
+          "retrieval_ms": 6273,
+          "citation_persistence_ms": 13,
+          "llm_first_token_ms": 671,
+          "llm_total_ms": 2117,
+          "answer_total_ms": 8424
+        }
+      },
+      "citations": [
+        {
+          "id": "069e842b-b34c-4a80-b4eb-7320bba3c259",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.70372,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 8454
+    },
+    {
+      "id": "tech_009",
+      "query": "Docker 容器启动后立刻退出如何定位原因？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "docker logs",
+        "端口冲突",
+        "环境变量"
+      ],
+      "difficulty": "easy",
+      "session_id": "6e0ec048-e180-4952-b3e1-422ba1d458a0",
+      "assistant_message_id": "2bfda7b4-37bb-4319-9ccf-ff730340f1a0",
+      "answer": "执行 `docker logs 容器名` 查看启动日志，重点查看最后几行报错；常见原因包括端口冲突、环境变量缺失、依赖服务未启动 [来源: tech.md, 第 5 页]。  \n如涉及生产环境变更，请务必遵循《生产发布管理流程》完成审批与回滚预案备案。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 714,
+        "output_tokens": 74,
+        "retrieval_run_id": "c2f0d01c-6ff3-4871-86c0-caee96e8019d",
+        "latency_ms": 6470,
+        "confidence_score": 0.788201,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 228,
+          "embedding_ms": 222,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6241,
+          "retrieval_ms": 6470,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 529,
+          "llm_total_ms": 2209,
+          "answer_total_ms": 8710
+        }
+      },
+      "citations": [
+        {
+          "id": "fee70346-80f2-404a-a1e6-e46a32104ddb",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.98525,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 8735
+    },
+    {
+      "id": "tech_010",
+      "query": "Spring Boot 创建 dataSource Bean 失败要检查哪些地方？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "application.yml",
+        "数据库账号",
+        "Caused by"
+      ],
+      "difficulty": "medium",
+      "session_id": "b0b54e63-34fa-4186-9c6a-0b4ffa5b696a",
+      "assistant_message_id": "89ffef1e-2ae9-4ac0-8133-3a9e46d35f21",
+      "answer": "Spring Boot 创建 `dataSource` Bean 失败时，需按以下步骤排查：\n\n1. 检查 `application.yml` 中的数据库连接配置（如 host、port、username、password、database name 等）是否正确 [来源: tech.md, 第 1 页]。  \n2. 确认数据库账号对目标数据库具有访问权限 [来源: tech.md, 第 1 页]。  \n3. 确认项目中已声明并引入正确的数据库驱动依赖（如 `mysql-connector-java`）[来源: tech.md, 第 1 页]。  \n4. 查看异常堆栈中最底层的 `Caused by` 信息，定位根本原因（例如连接超时、认证失败、SSL 配置冲突等）[来源: tech.md, 第 1 页]。\n\n⚠️ 注意：若涉及生产环境数据库变更或权限调整，须遵循《生产变更管理流程》提交审批工单，不得擅自操作。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 770,
+        "output_tokens": 213,
+        "retrieval_run_id": "f275c91d-8eb8-487d-8ac6-b48d73cd42e4",
+        "latency_ms": 6095,
+        "confidence_score": 0.774867,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 216,
+          "embedding_ms": 209,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5879,
+          "retrieval_ms": 6095,
+          "citation_persistence_ms": 13,
+          "llm_first_token_ms": 809,
+          "llm_total_ms": 4020,
+          "answer_total_ms": 10148
+        }
+      },
+      "citations": [
+        {
+          "id": "a0553369-1829-4173-88b5-98d4caf60f4e",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.96858,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 10172
+    },
+    {
+      "id": "access_001",
+      "query": "如何申请生产 MySQL 只读权限？",
+      "answerable": true,
+      "expected_sources": [
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "工单系统",
+        "生产",
+        "只读",
+        "使用期限"
+      ],
+      "difficulty": "easy",
+      "session_id": "b0b2fcd2-4243-4802-b860-bf85becc1263",
+      "assistant_message_id": "e2ab10d7-6e71-4dec-9c1c-15d35602cd96",
+      "answer": "在工单系统提交权限申请单，类型选择 MySQL，环境选择生产，权限选择只读，填写使用原因和使用期限，提交后等待数据库负责人审批。[来源: access_request.md, 第 1 页]  \n注意：生产数据库默认只批准只读权限，且所有权限申请均需人工审批，系统不会自动开通。[来源: access_request.md, 第 1 页]",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 997,
+        "output_tokens": 88,
+        "retrieval_run_id": "54bf2292-6f6f-4a79-bab8-5fb53be709f7",
+        "latency_ms": 6310,
+        "confidence_score": 0.891553,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 210,
+          "embedding_ms": 204,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 6099,
+          "retrieval_ms": 6310,
+          "citation_persistence_ms": 13,
+          "llm_first_token_ms": 841,
+          "llm_total_ms": 2785,
+          "answer_total_ms": 9126
+        }
+      },
+      "citations": [
+        {
+          "id": "f9f7ba89-c37f-4331-b1a3-604b00add62e",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "44896d38-29b5-4d0e-9ec6-df57116f8c16",
+          "score": 0.99758,
+          "excerpt": "## 四、常见问答对\n\n### 问：我要申请生产 MySQL 只读权限，怎么操作？\n\n答：在工单系统提交权限申请单，类型选择 MySQL，环境选择生产，权限选择只读，填写使用原因和使用期限，提交后等待数据库负责人审批。\n\n### 问：新同事需要开通 GitLab 权限怎么办？\n\n答：在工单系统提交 Git 权限申请，填写仓库地址和角色，通常 Developer 即可满足日常开发需要。\n\n### 问：VPN 权限到期了怎么办？\n\n答：VPN 权限到期后需要重新提交权限申请，填写使用人和使用期限，审批通过后会重新开通。\n\n### 问：生产服务器能不能直接登录？\n\n答：不能直接登录。需要提交生产环境访问权限申请，说明紧急原因，审批通过后获得临时权限，到期自动回收。\n\n### 问：权限申请一般多久能审批完？\n\n答：普通权限一般在 1 个工作日内处理；生产权限和紧急权限会走加急审批，具体进度可在工单系统查询。",
+          "url": null
+        },
+        {
+          "id": "4b8de2dc-ee9c-4bc7-9803-07f0805a7471",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.9349,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9140
+    },
+    {
+      "id": "access_002",
+      "query": "Git 仓库 Developer 和 Reporter 权限有什么区别？",
+      "answerable": true,
+      "expected_sources": [
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "Developer",
+        "推送代码",
+        "Reporter",
+        "只能查看"
+      ],
+      "difficulty": "medium",
+      "session_id": "b18bf7ef-39b4-4f49-9eba-dab4c2973b5b",
+      "assistant_message_id": "b1115c64-fee3-431f-b480-89a8371e2799",
+      "answer": "Git 仓库中，Developer 权限允许用户推送代码（即提交和推送变更到仓库），而 Reporter 权限仅允许用户查看仓库内容（如浏览代码、查看议题、流水线状态等），不具备任何写入权限[来源: access_request.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 65,
+        "retrieval_run_id": "628fca2d-5471-44fe-bb6f-f3de321f8327",
+        "latency_ms": 6296,
+        "confidence_score": 0.7577,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 204,
+          "embedding_ms": 198,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6090,
+          "retrieval_ms": 6296,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 569,
+          "llm_total_ms": 2019,
+          "answer_total_ms": 8344
+        }
+      },
+      "citations": [
+        {
+          "id": "f929b218-f8ef-443d-85bb-503bd594e118",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.94712,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.75,
+      "latency_ms": 8360
+    },
+    {
+      "id": "access_003",
+      "query": "VPN 权限默认可以使用多久？",
+      "answerable": true,
+      "expected_sources": [
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "30 天",
+        "重新申请"
+      ],
+      "difficulty": "easy",
+      "session_id": "7d81002c-0509-4d20-8753-b5400779871e",
+      "assistant_message_id": "241d265a-36d9-43bd-884d-3a6ad20eb7cd",
+      "answer": "VPN 权限默认开通周期为 30 天，到期需要重新申请 [来源: access_request.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 996,
+        "output_tokens": 32,
+        "retrieval_run_id": "68831a15-1a8a-4b4f-bd6b-cac02ea2bc78",
+        "latency_ms": 15275,
+        "confidence_score": 0.140194,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 209,
+          "embedding_ms": 203,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 15065,
+          "retrieval_ms": 15275,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 907,
+          "llm_total_ms": 1647,
+          "answer_total_ms": 16945
+        }
+      },
+      "citations": [
+        {
+          "id": "918df3f7-52ee-42c8-9a89-865cb7c054b6",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.15766,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        },
+        {
+          "id": "50c62fe5-03fe-4eb1-9927-9689f92368c6",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "44896d38-29b5-4d0e-9ec6-df57116f8c16",
+          "score": 0.14064,
+          "excerpt": "## 四、常见问答对\n\n### 问：我要申请生产 MySQL 只读权限，怎么操作？\n\n答：在工单系统提交权限申请单，类型选择 MySQL，环境选择生产，权限选择只读，填写使用原因和使用期限，提交后等待数据库负责人审批。\n\n### 问：新同事需要开通 GitLab 权限怎么办？\n\n答：在工单系统提交 Git 权限申请，填写仓库地址和角色，通常 Developer 即可满足日常开发需要。\n\n### 问：VPN 权限到期了怎么办？\n\n答：VPN 权限到期后需要重新提交权限申请，填写使用人和使用期限，审批通过后会重新开通。\n\n### 问：生产服务器能不能直接登录？\n\n答：不能直接登录。需要提交生产环境访问权限申请，说明紧急原因，审批通过后获得临时权限，到期自动回收。\n\n### 问：权限申请一般多久能审批完？\n\n答：普通权限一般在 1 个工作日内处理；生产权限和紧急权限会走加急审批，具体进度可在工单系统查询。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 16969
+    },
+    {
+      "id": "access_004",
+      "query": "生产服务器紧急排查权限会保留多长时间？",
+      "answerable": true,
+      "expected_sources": [
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "运维审批",
+        "临时权限",
+        "2 小时"
+      ],
+      "difficulty": "easy",
+      "session_id": "2017b347-1c90-473e-b6ce-b6f9d77bc4d3",
+      "assistant_message_id": "7718215b-f3ac-443d-9be5-c2ce49760151",
+      "answer": "生产服务器紧急排查权限一般保留 2 小时，到期后自动回收 [来源: access_request.md, 第 1 页]。  \n该权限需通过运维审批后开通，属于临时权限，不可延长，如需继续操作应重新提交申请并说明理由。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 998,
+        "output_tokens": 60,
+        "retrieval_run_id": "0377e7f2-9b27-4fd1-a0d6-540920309ce5",
+        "latency_ms": 15729,
+        "confidence_score": 0.541526,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 370,
+          "embedding_ms": 365,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15358,
+          "retrieval_ms": 15729,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 919,
+          "llm_total_ms": 2228,
+          "answer_total_ms": 17979
+        }
+      },
+      "citations": [
+        {
+          "id": "042b505f-ae9e-4521-8a83-c7d2bed80ec2",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "44896d38-29b5-4d0e-9ec6-df57116f8c16",
+          "score": 0.62536,
+          "excerpt": "## 四、常见问答对\n\n### 问：我要申请生产 MySQL 只读权限，怎么操作？\n\n答：在工单系统提交权限申请单，类型选择 MySQL，环境选择生产，权限选择只读，填写使用原因和使用期限，提交后等待数据库负责人审批。\n\n### 问：新同事需要开通 GitLab 权限怎么办？\n\n答：在工单系统提交 Git 权限申请，填写仓库地址和角色，通常 Developer 即可满足日常开发需要。\n\n### 问：VPN 权限到期了怎么办？\n\n答：VPN 权限到期后需要重新提交权限申请，填写使用人和使用期限，审批通过后会重新开通。\n\n### 问：生产服务器能不能直接登录？\n\n答：不能直接登录。需要提交生产环境访问权限申请，说明紧急原因，审批通过后获得临时权限，到期自动回收。\n\n### 问：权限申请一般多久能审批完？\n\n答：普通权限一般在 1 个工作日内处理；生产权限和紧急权限会走加急审批，具体进度可在工单系统查询。",
+          "url": null
+        },
+        {
+          "id": "3997292c-7b5a-4b4d-9d49-5664eb906a3e",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.41236,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 18000
+    },
+    {
+      "id": "access_005",
+      "query": "第三方合作人员账号需要满足什么要求？",
+      "answerable": true,
+      "expected_sources": [
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "对接负责人",
+        "有效期",
+        "自动禁用"
+      ],
+      "difficulty": "medium",
+      "session_id": "dfdbc32d-aa99-4961-a2b5-f53ac8ef617a",
+      "assistant_message_id": "879ebb07-ee3e-431b-8bfd-db13eeba7bff",
+      "answer": "第三方合作人员账号需满足以下要求：\n\n- 由对接负责人代为申请；  \n- 必须设置有效期，到期后自动禁用 [来源: access_request.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 755,
+        "output_tokens": 45,
+        "retrieval_run_id": "014bbfac-69b0-49bc-a5bc-4b05e9a8ff82",
+        "latency_ms": 15371,
+        "confidence_score": 0.47714,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 350,
+          "embedding_ms": 344,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15021,
+          "retrieval_ms": 15371,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 1141,
+          "llm_total_ms": 2138,
+          "answer_total_ms": 17533
+        }
+      },
+      "citations": [
+        {
+          "id": "1b43c620-8f7d-4dd0-8fcf-1b2fca45a1cb",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.59642,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 17562
+    },
+    {
+      "id": "incident_001",
+      "query": "核心业务完全不可用属于什么级别故障？",
+      "answerable": true,
+      "expected_sources": [
+        "incident.md"
+      ],
+      "expected_terms": [
+        "P0",
+        "5 分钟内响应"
+      ],
+      "difficulty": "easy",
+      "session_id": "7473dc57-67c2-4fdc-8747-95b24f7214ba",
+      "assistant_message_id": "14a6265c-021d-4230-89ad-b20ada1ac183",
+      "answer": "核心业务完全不可用属于 P0 级故障 [来源: incident.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 814,
+        "output_tokens": 25,
+        "retrieval_run_id": "a82596fc-c2e6-440e-89e1-23fbf5fdf1fb",
+        "latency_ms": 15391,
+        "confidence_score": 0.782332,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 364,
+          "embedding_ms": 358,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15027,
+          "retrieval_ms": 15391,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 1099,
+          "llm_total_ms": 1456,
+          "answer_total_ms": 16869
+        }
+      },
+      "citations": [
+        {
+          "id": "b774c2d7-70c4-4dd1-a038-fc54959b3110",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.97791,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.5,
+      "latency_ms": 16891
+    },
+    {
+      "id": "incident_002",
+      "query": "核心接口大面积超时的响应时限是多少？",
+      "answerable": true,
+      "expected_sources": [
+        "incident.md"
+      ],
+      "expected_terms": [
+        "P1",
+        "15 分钟"
+      ],
+      "difficulty": "easy",
+      "session_id": "7d45faea-f3ae-4841-8c84-80b71a003af4",
+      "assistant_message_id": "3716766b-7694-4cac-a007-920e12d808d4",
+      "answer": "核心接口大面积超时属于 P1 级故障，响应时限为 15 分钟内响应，需启动紧急排查 [来源: incident.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1071,
+        "output_tokens": 41,
+        "retrieval_run_id": "c1ce9eb7-bb9c-4b71-b7ec-ad6a59a4e529",
+        "latency_ms": 15428,
+        "confidence_score": 0.782346,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 388,
+          "embedding_ms": 383,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15039,
+          "retrieval_ms": 15428,
+          "citation_persistence_ms": 9,
+          "llm_first_token_ms": 800,
+          "llm_total_ms": 1723,
+          "answer_total_ms": 17177
+        }
+      },
+      "citations": [
+        {
+          "id": "76eb91e3-c559-48bc-a7a6-fb2af48a3e17",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.89802,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        },
+        {
+          "id": "04ac0002-8aec-4f35-91d4-668c36ececa5",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.63931,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 17203
+    },
+    {
+      "id": "incident_003",
+      "query": "提交线上故障时必须提供哪些信息？",
+      "answerable": true,
+      "expected_sources": [
+        "incident.md"
+      ],
+      "expected_terms": [
+        "发生时间",
+        "影响范围",
+        "最近是否有发布",
+        "联系方式"
+      ],
+      "difficulty": "medium",
+      "session_id": "1b9d2a0f-4362-4c95-b855-3f35ff433fab",
+      "assistant_message_id": "4d2bea1e-b5a0-4510-8327-9f5a6352705a",
+      "answer": "提交线上故障时必须提供以下7项信息：\n\n1. 发生时间  \n2. 影响范围  \n3. 影响系统或服务  \n4. 故障现象  \n5. 最近是否有发布或配置变更  \n6. 已尝试的处理动作  \n7. 紧急联系方式  \n\n[来源: incident.md, 第 1 页]",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 812,
+        "output_tokens": 79,
+        "retrieval_run_id": "8a368ad7-92ea-414a-b8b4-5ed79005621a",
+        "latency_ms": 15373,
+        "confidence_score": 0.783259,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 359,
+          "embedding_ms": 354,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15013,
+          "retrieval_ms": 15373,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 702,
+          "llm_total_ms": 2450,
+          "answer_total_ms": 17845
+        }
+      },
+      "citations": [
+        {
+          "id": "4ddb90fc-45f0-4c02-a59a-48e6e350dcde",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.97907,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 17875
+    },
+    {
+      "id": "incident_004",
+      "query": "发布后半小时内出现故障时应该怎么处理？",
+      "answerable": true,
+      "expected_sources": [
+        "incident.md"
+      ],
+      "expected_terms": [
+        "优先回滚",
+        "保留当前问题版本",
+        "15 分钟"
+      ],
+      "difficulty": "medium",
+      "session_id": "88e0c52d-fb47-4365-ae22-537a54ecb242",
+      "assistant_message_id": "c276c72d-279b-47d7-81df-55c15500c633",
+      "answer": "根据《故障上报与应急响应规范》，发布后半小时内出现故障时，应优先执行回滚操作[来源: incident.md, 第1页]。具体要求包括：\n\n- 回滚必须保留当前问题版本（如镜像、配置、日志等），便于后续根因分析[来源: incident.md, 第1页]；\n- 回滚后需观察核心监控指标至少15分钟，确认业务恢复正常[来源: incident.md, 第1页]；\n- 同时应立即按故障分级标准判断影响程度，并完成故障上报（含发生时间、影响范围、最近发布信息等要素）[来源: incident.md, 第1页]；\n- 若故障达到P0或P1级，须严格遵循对应响应要求（如5分钟内响应、拉群、通知值班负责人等）[来源: incident.md, 第1页]。\n\n注意：所有生产变更和回滚操作均需在运维平台提交工单并完成审批，严禁未经流程的直接操作。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1070,
+        "output_tokens": 216,
+        "retrieval_run_id": "fbd0829e-96fb-4780-931a-931f36e36c19",
+        "latency_ms": 15512,
+        "confidence_score": 0.806621,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 365,
+          "embedding_ms": 360,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15145,
+          "retrieval_ms": 15512,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 562,
+          "llm_total_ms": 5338,
+          "answer_total_ms": 20880
+        }
+      },
+      "citations": [
+        {
+          "id": "9a11219e-3f5f-4061-bf6d-b8ab1bee300d",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.92534,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        },
+        {
+          "id": "713608bd-0223-429d-98e9-c7566f79974a",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.66347,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.3333333333333333,
+      "latency_ms": 20907
+    },
+    {
+      "id": "incident_005",
+      "query": "发现线上数据可能丢失时能否自行恢复？",
+      "answerable": true,
+      "expected_sources": [
+        "incident.md"
+      ],
+      "expected_terms": [
+        "P0",
+        "停止相关写入",
+        "不要自行恢复"
+      ],
+      "difficulty": "hard",
+      "session_id": "ee93cc58-21a3-4b6e-8639-28c273aaf93d",
+      "assistant_message_id": "f1715c48-d51f-4ef0-95e5-a8f929f16976",
+      "answer": "不能自行恢复数据。发现数据可能丢失时，应立即上报 P0 故障，停止相关写入操作，并通知 DBA 和运维，检查备份和 binlog [来源: incident.md, 第 1 页]。任何自行恢复操作均不符合当前故障处理规范，存在进一步扩大风险。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 480,
+        "output_tokens": 66,
+        "retrieval_run_id": "30f7aad8-9b53-45a0-a27d-79d478559411",
+        "latency_ms": 15515,
+        "confidence_score": 0.747102,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 352,
+          "embedding_ms": 347,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15162,
+          "retrieval_ms": 15515,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 931,
+          "llm_total_ms": 2374,
+          "answer_total_ms": 17911
+        }
+      },
+      "citations": [
+        {
+          "id": "aacb86c6-fe56-44d1-8d9f-d8170e4b2bcb",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.93388,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 17938
+    },
+    {
+      "id": "policy_001",
+      "query": "公司的核心工作时间是几点到几点？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md"
+      ],
+      "expected_terms": [
+        "10:00",
+        "17:00"
+      ],
+      "difficulty": "easy",
+      "session_id": "4d686fda-a6e2-452e-97ea-f16c48eb19ae",
+      "assistant_message_id": "78133c6e-2f14-4e5d-ac11-2bfc8a1a06c0",
+      "answer": "公司核心工作时间为 10:00 至 17:00 [来源: policy_general.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 805,
+        "output_tokens": 32,
+        "retrieval_run_id": "064f6566-6013-4e08-94fd-e0b437aeb3ab",
+        "latency_ms": 9737,
+        "confidence_score": 0.748843,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 355,
+          "embedding_ms": 349,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 9382,
+          "retrieval_ms": 9737,
+          "citation_persistence_ms": 17,
+          "llm_first_token_ms": 935,
+          "llm_total_ms": 1678,
+          "answer_total_ms": 11449
+        }
+      },
+      "citations": [
+        {
+          "id": "bf504f45-dcd1-4fac-a5be-d5120db5190e",
+          "document_id": "1007afc0-bf5c-49e1-93e4-d244fd5346c1",
+          "document_name": "policy_general.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "08864833-a0f4-4806-88b8-6ffb908eaae8",
+          "score": 0.93605,
+          "excerpt": "---\ntitle: 公司制度与通用知识问答\ncategory: policy_general\nteam: hr\nsystem: internal_tech_kb\ndoc_type: wiki\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 公司制度与通用知识问答\n\n本文档覆盖公司日常制度、员工福利、报销流程和通用技术概念。\n\n## 一、考勤与假期\n\n### 工作时间\n\n- 标准工作时间为周一至周五。\n- 弹性上下班，核心工作时间为 10:00 至 17:00。\n\n### 年假\n\n- 员工转正后享有带薪年假。\n- 年假由 HR 系统统一计算。\n- 年假申请需提前 3 个工作日提交，由直属主管审批。\n\n### 调休\n\n- 加班调休需提前申请。\n- 调休有效期为 3 个月。\n- 调休和年假不能重复计算。\n\n## 二、报销流程\n\n### 报销范围\n\n- 交通费\n- 差旅住宿费\n- 培训费\n- 加班餐费\n\n### 报销步骤\n\n1. 在 OA 系统创建报销单。\n2. 按要求上传发票照片或电子发票。\n3. 提交直属主管审批。\n4. 财务审核。\n5. 审核通过后打款。\n\n### 发票要求\n\n- 发票抬头为公司全称。\n- 发票金额与实际消费一致。\n- 电子发票需上传完整 PDF 文件。\n\n## 三、入职流程\n\n### 入职当天\n\n1. 办理入职手续。\n2. 领取办公设备。\n3. 开通邮箱、OA、GitLab、内部 IM 等账号。\n4. 参加新员工培训。\n\n### 账号开通\n\n新员工账号由 HR 统一发起，一般入职当天完成基础账号开通，Git 仓库权限根据项目需要另行申请。\n\n## 四、通用技术概念\n\n### 什么是微服务架构？\n\n微服务架构是把一个大型应用拆分成多个可独立部署的小服务。每个服务负责单一业务能力，服务之间通过 HTTP、消息队列等方式通信。\n\n### 什么是 Kubernetes？\n\nKubernetes 是容器编排平台，负责容器应用的自动部署、扩缩容、服务发现和故障恢复。\n\n### 什么是 RAG？\n\nRAG 是检索增强生成。先从知识库中检索相关文档，再把检索结果作为上下文交给大模型生成答案，从而降低幻觉并附上引用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 11469
+    },
+    {
+      "id": "policy_002",
+      "query": "年假需要提前多久申请？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md"
+      ],
+      "expected_terms": [
+        "3 个工作日",
+        "直属主管"
+      ],
+      "difficulty": "easy",
+      "session_id": "d6eea455-9bbc-4b70-9d90-14f97759e25c",
+      "assistant_message_id": "cd5e2933-a52c-40ec-91aa-453788e77922",
+      "answer": "年假需提前 3 个工作日申请，由直属主管审批[来源: policy_general.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 802,
+        "output_tokens": 28,
+        "retrieval_run_id": "e9316c85-80f9-4b9a-9037-8a64daa5e710",
+        "latency_ms": 6162,
+        "confidence_score": 0.66952,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 189,
+          "embedding_ms": 183,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 5973,
+          "retrieval_ms": 6162,
+          "citation_persistence_ms": 19,
+          "llm_first_token_ms": 484,
+          "llm_total_ms": 1121,
+          "answer_total_ms": 7330
+        }
+      },
+      "citations": [
+        {
+          "id": "65b79331-e4d0-4aa1-85aa-fd3106faf08f",
+          "document_id": "1007afc0-bf5c-49e1-93e4-d244fd5346c1",
+          "document_name": "policy_general.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "08864833-a0f4-4806-88b8-6ffb908eaae8",
+          "score": 0.8369,
+          "excerpt": "---\ntitle: 公司制度与通用知识问答\ncategory: policy_general\nteam: hr\nsystem: internal_tech_kb\ndoc_type: wiki\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 公司制度与通用知识问答\n\n本文档覆盖公司日常制度、员工福利、报销流程和通用技术概念。\n\n## 一、考勤与假期\n\n### 工作时间\n\n- 标准工作时间为周一至周五。\n- 弹性上下班，核心工作时间为 10:00 至 17:00。\n\n### 年假\n\n- 员工转正后享有带薪年假。\n- 年假由 HR 系统统一计算。\n- 年假申请需提前 3 个工作日提交，由直属主管审批。\n\n### 调休\n\n- 加班调休需提前申请。\n- 调休有效期为 3 个月。\n- 调休和年假不能重复计算。\n\n## 二、报销流程\n\n### 报销范围\n\n- 交通费\n- 差旅住宿费\n- 培训费\n- 加班餐费\n\n### 报销步骤\n\n1. 在 OA 系统创建报销单。\n2. 按要求上传发票照片或电子发票。\n3. 提交直属主管审批。\n4. 财务审核。\n5. 审核通过后打款。\n\n### 发票要求\n\n- 发票抬头为公司全称。\n- 发票金额与实际消费一致。\n- 电子发票需上传完整 PDF 文件。\n\n## 三、入职流程\n\n### 入职当天\n\n1. 办理入职手续。\n2. 领取办公设备。\n3. 开通邮箱、OA、GitLab、内部 IM 等账号。\n4. 参加新员工培训。\n\n### 账号开通\n\n新员工账号由 HR 统一发起，一般入职当天完成基础账号开通，Git 仓库权限根据项目需要另行申请。\n\n## 四、通用技术概念\n\n### 什么是微服务架构？\n\n微服务架构是把一个大型应用拆分成多个可独立部署的小服务。每个服务负责单一业务能力，服务之间通过 HTTP、消息队列等方式通信。\n\n### 什么是 Kubernetes？\n\nKubernetes 是容器编排平台，负责容器应用的自动部署、扩缩容、服务发现和故障恢复。\n\n### 什么是 RAG？\n\nRAG 是检索增强生成。先从知识库中检索相关文档，再把检索结果作为上下文交给大模型生成答案，从而降低幻觉并附上引用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 7375
+    },
+    {
+      "id": "policy_003",
+      "query": "调休的有效期是多少？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md"
+      ],
+      "expected_terms": [
+        "3 个月"
+      ],
+      "difficulty": "easy",
+      "session_id": "e6d46b78-64b0-426f-8952-96f3d471b7d3",
+      "assistant_message_id": "7109c765-afbb-43d4-a549-941dc0bbb9e6",
+      "answer": "调休的有效期为 3 个月 [来源: policy_general.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 802,
+        "output_tokens": 23,
+        "retrieval_run_id": "2932db58-5348-492a-a39d-96436356ed20",
+        "latency_ms": 6220,
+        "confidence_score": 0.563294,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 234,
+          "embedding_ms": 226,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5986,
+          "retrieval_ms": 6220,
+          "citation_persistence_ms": 15,
+          "llm_first_token_ms": 677,
+          "llm_total_ms": 1038,
+          "answer_total_ms": 7294
+        }
+      },
+      "citations": [
+        {
+          "id": "b771a713-5336-4715-aa87-61c50eff5149",
+          "document_id": "1007afc0-bf5c-49e1-93e4-d244fd5346c1",
+          "document_name": "policy_general.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "08864833-a0f4-4806-88b8-6ffb908eaae8",
+          "score": 0.70412,
+          "excerpt": "---\ntitle: 公司制度与通用知识问答\ncategory: policy_general\nteam: hr\nsystem: internal_tech_kb\ndoc_type: wiki\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 公司制度与通用知识问答\n\n本文档覆盖公司日常制度、员工福利、报销流程和通用技术概念。\n\n## 一、考勤与假期\n\n### 工作时间\n\n- 标准工作时间为周一至周五。\n- 弹性上下班，核心工作时间为 10:00 至 17:00。\n\n### 年假\n\n- 员工转正后享有带薪年假。\n- 年假由 HR 系统统一计算。\n- 年假申请需提前 3 个工作日提交，由直属主管审批。\n\n### 调休\n\n- 加班调休需提前申请。\n- 调休有效期为 3 个月。\n- 调休和年假不能重复计算。\n\n## 二、报销流程\n\n### 报销范围\n\n- 交通费\n- 差旅住宿费\n- 培训费\n- 加班餐费\n\n### 报销步骤\n\n1. 在 OA 系统创建报销单。\n2. 按要求上传发票照片或电子发票。\n3. 提交直属主管审批。\n4. 财务审核。\n5. 审核通过后打款。\n\n### 发票要求\n\n- 发票抬头为公司全称。\n- 发票金额与实际消费一致。\n- 电子发票需上传完整 PDF 文件。\n\n## 三、入职流程\n\n### 入职当天\n\n1. 办理入职手续。\n2. 领取办公设备。\n3. 开通邮箱、OA、GitLab、内部 IM 等账号。\n4. 参加新员工培训。\n\n### 账号开通\n\n新员工账号由 HR 统一发起，一般入职当天完成基础账号开通，Git 仓库权限根据项目需要另行申请。\n\n## 四、通用技术概念\n\n### 什么是微服务架构？\n\n微服务架构是把一个大型应用拆分成多个可独立部署的小服务。每个服务负责单一业务能力，服务之间通过 HTTP、消息队列等方式通信。\n\n### 什么是 Kubernetes？\n\nKubernetes 是容器编排平台，负责容器应用的自动部署、扩缩容、服务发现和故障恢复。\n\n### 什么是 RAG？\n\nRAG 是检索增强生成。先从知识库中检索相关文档，再把检索结果作为上下文交给大模型生成答案，从而降低幻觉并附上引用。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 7328
+    },
+    {
+      "id": "policy_004",
+      "query": "电子发票报销有什么要求？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md"
+      ],
+      "expected_terms": [
+        "公司全称",
+        "金额",
+        "完整 PDF"
+      ],
+      "difficulty": "easy",
+      "session_id": "46d5e377-8e6e-49db-b1c3-707d9dd48cc9",
+      "assistant_message_id": "d91dadc0-7839-47bb-8f0e-12b4ced24e25",
+      "answer": "电子发票报销要求为：需要上传完整的 PDF 文件，且发票抬头必须为公司全称，金额须与实际消费一致 [来源: policy_general.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 437,
+        "output_tokens": 41,
+        "retrieval_run_id": "6219cadc-94ea-426e-8e32-06db83555437",
+        "latency_ms": 6321,
+        "confidence_score": 0.753027,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 220,
+          "embedding_ms": 212,
+          "milvus_ms": 7,
+          "rerank_input_count": 3,
+          "rerank_ms": 6099,
+          "retrieval_ms": 6321,
+          "citation_persistence_ms": 11,
+          "llm_first_token_ms": 762,
+          "llm_total_ms": 1672,
+          "answer_total_ms": 8025
+        }
+      },
+      "citations": [
+        {
+          "id": "164361cd-f1d6-4ef3-ad50-4d1725e21bfa",
+          "document_id": "1007afc0-bf5c-49e1-93e4-d244fd5346c1",
+          "document_name": "policy_general.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "ff13587d-fe17-461c-966c-8c07c8d321b0",
+          "score": 0.94128,
+          "excerpt": "## 五、常见问答对\n\n### 问：公司年假有多少天？\n\n答：年假天数由 HR 系统根据司龄计算，转正后可享受带薪年假。具体天数请登录 HR 系统查看。\n\n### 问：报销发票有什么要求？\n\n答：发票抬头必须为公司全称，金额与实际消费一致，电子发票需要上传完整 PDF 文件。\n\n### 问：新员工账号什么时候开通？\n\n答：HR 会在入职当天发起账号开通流程，基础账号当天完成，Git 仓库等权限需要入职后根据项目另行申请。\n\n### 问：什么是微服务？\n\n答：微服务是一种软件架构风格，将应用拆分为多个可独立开发、部署和扩展的小服务，每个服务围绕单一业务能力组织。\n\n### 问：什么是 Kubernetes？\n\n答：Kubernetes 是一个开源的容器编排平台，可以管理容器应用的部署、扩缩容、服务发现和故障恢复。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 8047
+    },
+    {
+      "id": "policy_005",
+      "query": "RAG 是什么，它为什么可以降低幻觉？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md"
+      ],
+      "expected_terms": [
+        "检索增强生成",
+        "知识库",
+        "上下文",
+        "引用"
+      ],
+      "difficulty": "medium",
+      "session_id": "66cc8947-282f-4b1f-bfa7-760f58e13765",
+      "assistant_message_id": "7ff18f4e-c019-45db-a64e-4dcb02f5b9ae",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "9b28d645-1934-4ac6-aae2-54de9a7a13b5",
+        "latency_ms": 6270,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 242,
+          "embedding_ms": 234,
+          "milvus_ms": 7,
+          "rerank_input_count": 3,
+          "rerank_ms": 6027,
+          "retrieval_ms": 6270,
+          "citation_persistence_ms": 7,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 6300
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 6328
+    },
+    {
+      "id": "ticket_001",
+      "query": "工单状态 pending 代表什么？",
+      "answerable": true,
+      "expected_sources": [
+        "ticket_inquiry.md"
+      ],
+      "expected_terms": [
+        "待处理",
+        "等待处理人接单"
+      ],
+      "difficulty": "easy",
+      "session_id": "2dba5328-1d6e-456c-8150-a9c8ed4b90b2",
+      "assistant_message_id": "40810d8b-c05e-4b49-8d76-21c0f95faa5b",
+      "answer": "工单状态 `pending` 表示工单已经提交成功，但还没有处理人接单[来源: ticket_inquiry.md, 第 1 页]。普通工单一般在 1 个工作日内完成接单[来源: ticket_inquiry.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 920,
+        "output_tokens": 64,
+        "retrieval_run_id": "bca2c5de-5673-4043-97f9-503294f30cdb",
+        "latency_ms": 6248,
+        "confidence_score": 0.667776,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 3,
+          "rewrite_ms": 0,
+          "search_ms": 229,
+          "embedding_ms": 223,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 6017,
+          "retrieval_ms": 6248,
+          "citation_persistence_ms": 13,
+          "llm_first_token_ms": 770,
+          "llm_total_ms": 2157,
+          "answer_total_ms": 8437
+        }
+      },
+      "citations": [
+        {
+          "id": "2ab76ace-297e-4e09-854d-385c7080ab60",
+          "document_id": "21c27077-04fa-466a-8669-ff1597ead46b",
+          "document_name": "ticket_inquiry.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1425c7ba-160e-4a0c-999a-64a88aef9bcc",
+          "score": 0.83472,
+          "excerpt": "---\ntitle: 工单进度查询说明\ncategory: ticket_inquiry\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 工单进度查询说明\n\n本文档说明如何查询工单进度、理解工单状态，以及常见催办方式。\n\n## 一、工单查询方式\n\n### 方式一：工单系统查询\n\n1. 登录公司内部工单系统。\n2. 进入「我的工单」页面。\n3. 输入工单号或关键词搜索。\n4. 查看工单状态、处理人和更新时间。\n\n### 方式二：通过问答系统查询\n\n可以直接提问，例如：\n\n- “我昨天提的权限申请工单处理到哪了？”\n- “帮我查一下 TN20260822001 工单状态”\n\n问答系统会查询工单表并返回最新进度。\n\n## 二、工单状态说明\n\n| 状态 | 含义 |\n|------|------|\n| `pending` | 待处理，工单已提交，等待处理人接单 |\n| `processing` | 处理中，处理人已经接单并开始处理 |\n| `done` | 已完成，问题已解决 |\n| `closed` | 已关闭，工单结束 |\n\n## 三、工单字段说明\n\n- 工单号：类似 `TN20260822001`，提交后自动生成。\n- 问题类型：权限申请、故障上报、咨询、投诉建议等。\n- 优先级：low / normal / high / urgent。\n- 处理人：当前负责处理该工单的人员。\n- 更新时间：工单最后变更时间。\n\n## 四、催办规则\n\n- 普通工单超过 1 个工作日未处理，可以在工单系统点击「催办」。\n- 紧急工单超过 30 分钟未响应，建议直接联系值班负责人。\n- 重复催办不会提高优先级，建议补充更明确的问题描述。\n\n## 五、常见问答对\n\n### 问：我昨天提的权限申请工单处理到哪了？\n\n答：可以登录工单系统，在「我的工单」中按提交时间查询，查看工单状态、处理人和最新回复。也可以通过问答系统提供工单号查询。\n\n### 问：工单状态显示 pending 是什么意思？\n\n答：表示工单已经提交成功，但还没有处理人接单。普通工单一般在 1 个工作日内处理。\n\n### 问：工单一直没人处理怎",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.0,
+      "latency_ms": 8469
+    },
+    {
+      "id": "ticket_002",
+      "query": "普通工单多久没处理可以催办？",
+      "answerable": true,
+      "expected_sources": [
+        "ticket_inquiry.md"
+      ],
+      "expected_terms": [
+        "1 个工作日",
+        "催办"
+      ],
+      "difficulty": "easy",
+      "session_id": "348068f6-310e-4aeb-a717-dc65e56e7ea4",
+      "assistant_message_id": "b6be7995-7832-454a-a153-30068f3142fd",
+      "answer": "普通工单超过 1 个工作日未处理，可以在工单系统点击「催办」[来源: ticket_inquiry.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 924,
+        "output_tokens": 35,
+        "retrieval_run_id": "ed616f08-92ec-4836-9d99-7744e5ffff03",
+        "latency_ms": 6316,
+        "confidence_score": 0.784469,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 228,
+          "embedding_ms": 221,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6088,
+          "retrieval_ms": 6316,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 1001,
+          "llm_total_ms": 1766,
+          "answer_total_ms": 8112
+        }
+      },
+      "citations": [
+        {
+          "id": "5f63a6af-ad7b-4a85-9e10-7084aae88de6",
+          "document_id": "21c27077-04fa-466a-8669-ff1597ead46b",
+          "document_name": "ticket_inquiry.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1425c7ba-160e-4a0c-999a-64a88aef9bcc",
+          "score": 0.98059,
+          "excerpt": "---\ntitle: 工单进度查询说明\ncategory: ticket_inquiry\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 工单进度查询说明\n\n本文档说明如何查询工单进度、理解工单状态，以及常见催办方式。\n\n## 一、工单查询方式\n\n### 方式一：工单系统查询\n\n1. 登录公司内部工单系统。\n2. 进入「我的工单」页面。\n3. 输入工单号或关键词搜索。\n4. 查看工单状态、处理人和更新时间。\n\n### 方式二：通过问答系统查询\n\n可以直接提问，例如：\n\n- “我昨天提的权限申请工单处理到哪了？”\n- “帮我查一下 TN20260822001 工单状态”\n\n问答系统会查询工单表并返回最新进度。\n\n## 二、工单状态说明\n\n| 状态 | 含义 |\n|------|------|\n| `pending` | 待处理，工单已提交，等待处理人接单 |\n| `processing` | 处理中，处理人已经接单并开始处理 |\n| `done` | 已完成，问题已解决 |\n| `closed` | 已关闭，工单结束 |\n\n## 三、工单字段说明\n\n- 工单号：类似 `TN20260822001`，提交后自动生成。\n- 问题类型：权限申请、故障上报、咨询、投诉建议等。\n- 优先级：low / normal / high / urgent。\n- 处理人：当前负责处理该工单的人员。\n- 更新时间：工单最后变更时间。\n\n## 四、催办规则\n\n- 普通工单超过 1 个工作日未处理，可以在工单系统点击「催办」。\n- 紧急工单超过 30 分钟未响应，建议直接联系值班负责人。\n- 重复催办不会提高优先级，建议补充更明确的问题描述。\n\n## 五、常见问答对\n\n### 问：我昨天提的权限申请工单处理到哪了？\n\n答：可以登录工单系统，在「我的工单」中按提交时间查询，查看工单状态、处理人和最新回复。也可以通过问答系统提供工单号查询。\n\n### 问：工单状态显示 pending 是什么意思？\n\n答：表示工单已经提交成功，但还没有处理人接单。普通工单一般在 1 个工作日内处理。\n\n### 问：工单一直没人处理怎",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 8141
+    },
+    {
+      "id": "ticket_003",
+      "query": "紧急工单超过多久未响应应联系值班负责人？",
+      "answerable": true,
+      "expected_sources": [
+        "ticket_inquiry.md"
+      ],
+      "expected_terms": [
+        "30 分钟",
+        "值班负责人"
+      ],
+      "difficulty": "easy",
+      "session_id": "bcf6f170-e039-4543-b437-dfc6f2b44939",
+      "assistant_message_id": "3f2c8d03-64b1-46cd-afd3-8dcdd48ba2a3",
+      "answer": "紧急工单超过 30 分钟未响应，建议直接联系值班负责人。[来源: ticket_inquiry.md, 第 1 页]",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 926,
+        "output_tokens": 32,
+        "retrieval_run_id": "e34c52de-a36b-4867-829a-d4242e0d8f11",
+        "latency_ms": 6198,
+        "confidence_score": 0.790086,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 213,
+          "embedding_ms": 206,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5984,
+          "retrieval_ms": 6198,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 662,
+          "llm_total_ms": 1447,
+          "answer_total_ms": 7674
+        }
+      },
+      "citations": [
+        {
+          "id": "8f45a07c-d248-4c84-a954-d83aa9af42ab",
+          "document_id": "21c27077-04fa-466a-8669-ff1597ead46b",
+          "document_name": "ticket_inquiry.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1425c7ba-160e-4a0c-999a-64a88aef9bcc",
+          "score": 0.98761,
+          "excerpt": "---\ntitle: 工单进度查询说明\ncategory: ticket_inquiry\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 工单进度查询说明\n\n本文档说明如何查询工单进度、理解工单状态，以及常见催办方式。\n\n## 一、工单查询方式\n\n### 方式一：工单系统查询\n\n1. 登录公司内部工单系统。\n2. 进入「我的工单」页面。\n3. 输入工单号或关键词搜索。\n4. 查看工单状态、处理人和更新时间。\n\n### 方式二：通过问答系统查询\n\n可以直接提问，例如：\n\n- “我昨天提的权限申请工单处理到哪了？”\n- “帮我查一下 TN20260822001 工单状态”\n\n问答系统会查询工单表并返回最新进度。\n\n## 二、工单状态说明\n\n| 状态 | 含义 |\n|------|------|\n| `pending` | 待处理，工单已提交，等待处理人接单 |\n| `processing` | 处理中，处理人已经接单并开始处理 |\n| `done` | 已完成，问题已解决 |\n| `closed` | 已关闭，工单结束 |\n\n## 三、工单字段说明\n\n- 工单号：类似 `TN20260822001`，提交后自动生成。\n- 问题类型：权限申请、故障上报、咨询、投诉建议等。\n- 优先级：low / normal / high / urgent。\n- 处理人：当前负责处理该工单的人员。\n- 更新时间：工单最后变更时间。\n\n## 四、催办规则\n\n- 普通工单超过 1 个工作日未处理，可以在工单系统点击「催办」。\n- 紧急工单超过 30 分钟未响应，建议直接联系值班负责人。\n- 重复催办不会提高优先级，建议补充更明确的问题描述。\n\n## 五、常见问答对\n\n### 问：我昨天提的权限申请工单处理到哪了？\n\n答：可以登录工单系统，在「我的工单」中按提交时间查询，查看工单状态、处理人和最新回复。也可以通过问答系统提供工单号查询。\n\n### 问：工单状态显示 pending 是什么意思？\n\n答：表示工单已经提交成功，但还没有处理人接单。普通工单一般在 1 个工作日内处理。\n\n### 问：工单一直没人处理怎",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 7703
+    },
+    {
+      "id": "ticket_004",
+      "query": "工单显示 done 但问题没解决怎么办？",
+      "answerable": true,
+      "expected_sources": [
+        "ticket_inquiry.md"
+      ],
+      "expected_terms": [
+        "原工单",
+        "补充信息",
+        "重新打开"
+      ],
+      "difficulty": "medium",
+      "session_id": "ab6adfaa-dfaf-4f13-b67a-d707a82bddf0",
+      "assistant_message_id": "1fb7f359-88f1-43b5-ac53-2f5d30f05689",
+      "answer": "如果工单状态显示 `done` 但问题尚未完全解决，您可以在原工单中继续补充信息（例如描述未解决的具体现象、提供新日志或截图等），处理人会收到通知并重新打开工单继续处理 [来源: ticket_inquiry.md, 第 1 页]。\n\n⚠️ 注意：此操作属于常规工单协同流程，无需发起新工单；但若涉及生产环境紧急故障或权限异常等高风险场景，请同步按《生产事件应急响应流程》升级上报 [来源: ticket_inquiry.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 923,
+        "output_tokens": 127,
+        "retrieval_run_id": "5f17f14f-9b40-4e3b-a773-7c67c226d098",
+        "latency_ms": 6287,
+        "confidence_score": 0.49151,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 209,
+          "embedding_ms": 202,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6077,
+          "retrieval_ms": 6287,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 606,
+          "llm_total_ms": 3486,
+          "answer_total_ms": 9804
+        }
+      },
+      "citations": [
+        {
+          "id": "cf5a9612-48cd-4230-8a89-89190604326b",
+          "document_id": "21c27077-04fa-466a-8669-ff1597ead46b",
+          "document_name": "ticket_inquiry.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1425c7ba-160e-4a0c-999a-64a88aef9bcc",
+          "score": 0.61439,
+          "excerpt": "---\ntitle: 工单进度查询说明\ncategory: ticket_inquiry\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 工单进度查询说明\n\n本文档说明如何查询工单进度、理解工单状态，以及常见催办方式。\n\n## 一、工单查询方式\n\n### 方式一：工单系统查询\n\n1. 登录公司内部工单系统。\n2. 进入「我的工单」页面。\n3. 输入工单号或关键词搜索。\n4. 查看工单状态、处理人和更新时间。\n\n### 方式二：通过问答系统查询\n\n可以直接提问，例如：\n\n- “我昨天提的权限申请工单处理到哪了？”\n- “帮我查一下 TN20260822001 工单状态”\n\n问答系统会查询工单表并返回最新进度。\n\n## 二、工单状态说明\n\n| 状态 | 含义 |\n|------|------|\n| `pending` | 待处理，工单已提交，等待处理人接单 |\n| `processing` | 处理中，处理人已经接单并开始处理 |\n| `done` | 已完成，问题已解决 |\n| `closed` | 已关闭，工单结束 |\n\n## 三、工单字段说明\n\n- 工单号：类似 `TN20260822001`，提交后自动生成。\n- 问题类型：权限申请、故障上报、咨询、投诉建议等。\n- 优先级：low / normal / high / urgent。\n- 处理人：当前负责处理该工单的人员。\n- 更新时间：工单最后变更时间。\n\n## 四、催办规则\n\n- 普通工单超过 1 个工作日未处理，可以在工单系统点击「催办」。\n- 紧急工单超过 30 分钟未响应，建议直接联系值班负责人。\n- 重复催办不会提高优先级，建议补充更明确的问题描述。\n\n## 五、常见问答对\n\n### 问：我昨天提的权限申请工单处理到哪了？\n\n答：可以登录工单系统，在「我的工单」中按提交时间查询，查看工单状态、处理人和最新回复。也可以通过问答系统提供工单号查询。\n\n### 问：工单状态显示 pending 是什么意思？\n\n答：表示工单已经提交成功，但还没有处理人接单。普通工单一般在 1 个工作日内处理。\n\n### 问：工单一直没人处理怎",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9828
+    },
+    {
+      "id": "feedback_001",
+      "query": "知识库答案有错误应该怎么反馈？",
+      "answerable": true,
+      "expected_sources": [
+        "complaint_suggestion.md"
+      ],
+      "expected_terms": [
+        "点踩",
+        "错误描述",
+        "文档负责人"
+      ],
+      "difficulty": "easy",
+      "session_id": "e9d256ae-c0c6-4ebd-aaab-564748a6e605",
+      "assistant_message_id": "601ba482-41a7-4230-b5b9-6651881d0365",
+      "answer": "知识库答案有错误时，您可以在答案下方点击「点踩」，选择错误类型并填写正确信息；相关文档负责人复核后会更新知识库内容 [来源: complaint_suggestion.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 784,
+        "output_tokens": 51,
+        "retrieval_run_id": "78c76cd8-f824-460d-966e-9307d1e4c2d9",
+        "latency_ms": 8764,
+        "confidence_score": 0.789787,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 215,
+          "embedding_ms": 207,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 8548,
+          "retrieval_ms": 8764,
+          "citation_persistence_ms": 8,
+          "llm_first_token_ms": 501,
+          "llm_total_ms": 1610,
+          "answer_total_ms": 10396
+        }
+      },
+      "citations": [
+        {
+          "id": "fc1bdbc2-9dbe-4646-900e-b7931464b6ea",
+          "document_id": "e5947bcb-e4be-4b04-be8c-46bc5eb2917b",
+          "document_name": "complaint_suggestion.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "ff4426f5-cb02-4780-88ef-bacc94da1730",
+          "score": 0.98723,
+          "excerpt": "---\ntitle: 投诉与建议处理说明\ncategory: complaint_suggestion\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 投诉与建议处理说明\n\n本文档说明用户如何提交投诉和建议，以及投诉建议的处理流程。\n\n## 一、投诉渠道\n\n1. 在问答系统回答下方点击「转人工」或「我要投诉」。\n2. 在工单系统提交「投诉建议」类型工单。\n3. 联系对应系统负责人反馈。\n\n投诉时请尽量提供：\n\n- 发生时间\n- 相关工单号或会话记录\n- 具体问题和期望结果\n\n## 二、建议反馈渠道\n\n用户对系统功能、知识库内容、交互体验的建议，可以通过以下方式提交：\n\n1. 问答系统反馈入口。\n2. 工单系统「建议」类型。\n3. 团队周会统一收集。\n\n建议内容会由产品负责人定期评估，并回复是否采纳和计划时间。\n\n## 三、投诉处理流程\n\n1. 用户提交投诉。\n2. 系统自动创建投诉工单。\n3. 相关负责人 1 个工作日内响应。\n4. 核实问题原因。\n5. 给出处理结果和改进措施。\n6. 用户确认后关闭工单。\n\n## 四、知识库内容纠错\n\n如果用户发现知识库答案有误，可以：\n\n1. 在答案下方点击「点踩」。\n2. 选择错误类型并填写正确信息。\n3. 相关文档负责人复核后更新知识库。\n\n## 五、常见问答对\n\n### 问：我要投诉刚才的问答结果，怎么处理？\n\n答：可以在答案下方点击「点踩」或「转人工」，系统会记录本次会话并生成投诉工单，相关负责人在 1 个工作日内处理。\n\n### 问：我想给知识库提建议怎么办？\n\n答：可以通过问答系统的反馈入口提交，或直接在工单系统创建「建议」类型工单，产品负责人会定期评估回复。\n\n### 问：知识库答案有错误，怎么告诉负责人？\n\n答：在答案下方点击「点踩」，填写具体错误描述，文档负责人复核后会更新对应知识库内容。\n\n### 问：投诉工单一般多久处理？\n\n答：投诉工单要求 1 个工作日内响应，处理人会先确认问题，再给出处理结果和改进措施。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 10422
+    },
+    {
+      "id": "feedback_002",
+      "query": "投诉工单要求多久响应？",
+      "answerable": true,
+      "expected_sources": [
+        "complaint_suggestion.md"
+      ],
+      "expected_terms": [
+        "1 个工作日",
+        "响应"
+      ],
+      "difficulty": "easy",
+      "session_id": "e6b5aacf-8f10-4bc9-9028-7ba6d6f75dea",
+      "assistant_message_id": "f8edae10-2e8d-4023-af4d-aed5c27cb3cd",
+      "answer": "投诉工单要求在1个工作日内响应[来源: complaint_suggestion.md, 第 三 节]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 783,
+        "output_tokens": 25,
+        "retrieval_run_id": "cb631ece-1074-43af-a2ec-898084713f3a",
+        "latency_ms": 15400,
+        "confidence_score": 0.78979,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 332,
+          "embedding_ms": 326,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15067,
+          "retrieval_ms": 15400,
+          "citation_persistence_ms": 7,
+          "llm_first_token_ms": 469,
+          "llm_total_ms": 1028,
+          "answer_total_ms": 16450
+        }
+      },
+      "citations": [
+        {
+          "id": "7fd8152f-6319-42f8-9585-1a59328c7f3f",
+          "document_id": "e5947bcb-e4be-4b04-be8c-46bc5eb2917b",
+          "document_name": "complaint_suggestion.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "ff4426f5-cb02-4780-88ef-bacc94da1730",
+          "score": 0.98724,
+          "excerpt": "---\ntitle: 投诉与建议处理说明\ncategory: complaint_suggestion\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 投诉与建议处理说明\n\n本文档说明用户如何提交投诉和建议，以及投诉建议的处理流程。\n\n## 一、投诉渠道\n\n1. 在问答系统回答下方点击「转人工」或「我要投诉」。\n2. 在工单系统提交「投诉建议」类型工单。\n3. 联系对应系统负责人反馈。\n\n投诉时请尽量提供：\n\n- 发生时间\n- 相关工单号或会话记录\n- 具体问题和期望结果\n\n## 二、建议反馈渠道\n\n用户对系统功能、知识库内容、交互体验的建议，可以通过以下方式提交：\n\n1. 问答系统反馈入口。\n2. 工单系统「建议」类型。\n3. 团队周会统一收集。\n\n建议内容会由产品负责人定期评估，并回复是否采纳和计划时间。\n\n## 三、投诉处理流程\n\n1. 用户提交投诉。\n2. 系统自动创建投诉工单。\n3. 相关负责人 1 个工作日内响应。\n4. 核实问题原因。\n5. 给出处理结果和改进措施。\n6. 用户确认后关闭工单。\n\n## 四、知识库内容纠错\n\n如果用户发现知识库答案有误，可以：\n\n1. 在答案下方点击「点踩」。\n2. 选择错误类型并填写正确信息。\n3. 相关文档负责人复核后更新知识库。\n\n## 五、常见问答对\n\n### 问：我要投诉刚才的问答结果，怎么处理？\n\n答：可以在答案下方点击「点踩」或「转人工」，系统会记录本次会话并生成投诉工单，相关负责人在 1 个工作日内处理。\n\n### 问：我想给知识库提建议怎么办？\n\n答：可以通过问答系统的反馈入口提交，或直接在工单系统创建「建议」类型工单，产品负责人会定期评估回复。\n\n### 问：知识库答案有错误，怎么告诉负责人？\n\n答：在答案下方点击「点踩」，填写具体错误描述，文档负责人复核后会更新对应知识库内容。\n\n### 问：投诉工单一般多久处理？\n\n答：投诉工单要求 1 个工作日内响应，处理人会先确认问题，再给出处理结果和改进措施。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.5,
+      "latency_ms": 16485
+    },
+    {
+      "id": "feedback_003",
+      "query": "可以通过哪些渠道给知识库提建议？",
+      "answerable": true,
+      "expected_sources": [
+        "complaint_suggestion.md"
+      ],
+      "expected_terms": [
+        "反馈入口",
+        "工单系统",
+        "团队周会"
+      ],
+      "difficulty": "medium",
+      "session_id": "b2ef211e-3d7c-4586-bf35-d8f3a626e55a",
+      "assistant_message_id": "fe311f7f-4d18-487f-84a9-5eec10143b76",
+      "answer": "可以通过以下渠道给知识库提建议：  \n1. 问答系统的反馈入口；  \n2. 工单系统中创建「建议」类型工单；  \n3. 团队周会统一收集（适用于内部成员在例会上提出）[来源: complaint_suggestion.md, 第 1 页]。  \n\n建议内容将由产品负责人定期评估，并回复是否采纳及计划实施时间[来源: complaint_suggestion.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 786,
+        "output_tokens": 100,
+        "retrieval_run_id": "d49aad68-b9e6-493d-ae44-01d33e6fb799",
+        "latency_ms": 15579,
+        "confidence_score": 0.739922,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 363,
+          "embedding_ms": 357,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15216,
+          "retrieval_ms": 15579,
+          "citation_persistence_ms": 7,
+          "llm_first_token_ms": 479,
+          "llm_total_ms": 2690,
+          "answer_total_ms": 18291
+        }
+      },
+      "citations": [
+        {
+          "id": "764c015f-5c88-4935-8915-491be5f7da06",
+          "document_id": "e5947bcb-e4be-4b04-be8c-46bc5eb2917b",
+          "document_name": "complaint_suggestion.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "ff4426f5-cb02-4780-88ef-bacc94da1730",
+          "score": 0.9249,
+          "excerpt": "---\ntitle: 投诉与建议处理说明\ncategory: complaint_suggestion\nteam: ops\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 投诉与建议处理说明\n\n本文档说明用户如何提交投诉和建议，以及投诉建议的处理流程。\n\n## 一、投诉渠道\n\n1. 在问答系统回答下方点击「转人工」或「我要投诉」。\n2. 在工单系统提交「投诉建议」类型工单。\n3. 联系对应系统负责人反馈。\n\n投诉时请尽量提供：\n\n- 发生时间\n- 相关工单号或会话记录\n- 具体问题和期望结果\n\n## 二、建议反馈渠道\n\n用户对系统功能、知识库内容、交互体验的建议，可以通过以下方式提交：\n\n1. 问答系统反馈入口。\n2. 工单系统「建议」类型。\n3. 团队周会统一收集。\n\n建议内容会由产品负责人定期评估，并回复是否采纳和计划时间。\n\n## 三、投诉处理流程\n\n1. 用户提交投诉。\n2. 系统自动创建投诉工单。\n3. 相关负责人 1 个工作日内响应。\n4. 核实问题原因。\n5. 给出处理结果和改进措施。\n6. 用户确认后关闭工单。\n\n## 四、知识库内容纠错\n\n如果用户发现知识库答案有误，可以：\n\n1. 在答案下方点击「点踩」。\n2. 选择错误类型并填写正确信息。\n3. 相关文档负责人复核后更新知识库。\n\n## 五、常见问答对\n\n### 问：我要投诉刚才的问答结果，怎么处理？\n\n答：可以在答案下方点击「点踩」或「转人工」，系统会记录本次会话并生成投诉工单，相关负责人在 1 个工作日内处理。\n\n### 问：我想给知识库提建议怎么办？\n\n答：可以通过问答系统的反馈入口提交，或直接在工单系统创建「建议」类型工单，产品负责人会定期评估回复。\n\n### 问：知识库答案有错误，怎么告诉负责人？\n\n答：在答案下方点击「点踩」，填写具体错误描述，文档负责人复核后会更新对应知识库内容。\n\n### 问：投诉工单一般多久处理？\n\n答：投诉工单要求 1 个工作日内响应，处理人会先确认问题，再给出处理结果和改进措施。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 18313
+    },
+    {
+      "id": "multi_001",
+      "query": "生产接口发布后开始返回 503，应该如何排查并决定是否回滚？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md",
+        "incident.md"
+      ],
+      "expected_terms": [
+        "健康检查",
+        "网关日志",
+        "30 分钟",
+        "优先回滚"
+      ],
+      "difficulty": "hard",
+      "session_id": "8091da0e-aebb-4a20-8a41-116581df47e7",
+      "assistant_message_id": "343aa275-d50a-4959-a928-fa761108d961",
+      "answer": "根据《故障上报与应急响应规范》和《常见报错排查》文档，生产接口发布后返回 503 的处理流程如下：\n\n1. **立即确认故障等级**：  \n   若该接口为核心接口（如订单创建、支付回调等），且影响全部用户，则属于 P0 或 P1 级故障，需立即启动应急响应 [来源: incident.md, 第 1 页]。\n\n2. **初步排查 503 原因**：  \n   - 检查服务健康检查状态（如 `/actuator/health`）是否为 DOWN；  \n   - 查看网关日志和服务日志，确认是否有上游服务未启动、线程池满、或节点未注册；  \n   - 确认是否正处于发布或滚动重启中（如 Kubernetes Pod 处于 `Pending` 或 `CrashLoopBackOff` 状态）；  \n   - 检查最近变更：若 503 出现在发布后 30 分钟内，应高度怀疑本次发布引入问题 [来源: tech.md, 第 1 页]。\n\n3. **决策是否回滚**：  \n   - 若故障发生在发布后 30 分钟内，**优先回滚**至前一稳定版本；  \n   - 回滚前须保留当前问题版本（镜像、配置、日志），便于后续根因分析；  \n   - 回滚后需观察核心监控指标（如成功率、延迟、QPS）至少 15 分钟 [来源: incident.md, 第 1 页]。\n\n4. **同步与上报**：  \n   - 按照故障上报模板提交关键信息（时间、系统、现象、最近变更、已尝试动作等）；  \n   - 在故障群中实时同步进展，避免重复排查 [来源: incident.md, 第 1 页]。\n\n⚠️ 注意：回滚属生产变更操作，须严格遵循值班负责人确认及变更审批流程，不得擅自执行。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1624,
+        "output_tokens": 436,
+        "retrieval_run_id": "622b1b35-f29a-4cc8-a641-6bc37873317e",
+        "latency_ms": 15504,
+        "confidence_score": 0.883233,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 3,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 443,
+          "embedding_ms": 437,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15061,
+          "retrieval_ms": 15504,
+          "citation_persistence_ms": 9,
+          "llm_first_token_ms": 1014,
+          "llm_total_ms": 7594,
+          "answer_total_ms": 23122
+        }
+      },
+      "citations": [
+        {
+          "id": "0b0f6c4f-1edb-4b10-a163-cf15d8619ca1",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.91997,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        },
+        {
+          "id": "3d43cbdc-f773-4c07-a7e8-6f722d762fcc",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.8073,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        },
+        {
+          "id": "b66b4d82-1f8a-4af7-8100-e61659e83cc2",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.66526,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 23156
+    },
+    {
+      "id": "multi_002",
+      "query": "新员工入职后如何获得基础账号和项目 Git 仓库权限？",
+      "answerable": true,
+      "expected_sources": [
+        "policy_general.md",
+        "access_request.md"
+      ],
+      "expected_terms": [
+        "HR",
+        "入职当天",
+        "工单系统",
+        "仓库地址"
+      ],
+      "difficulty": "hard",
+      "session_id": "c2198401-71c1-458e-a5e1-927ea1123241",
+      "assistant_message_id": "a78fd011-e41c-4859-97b9-4e1f772124d4",
+      "answer": "新员工入职后，基础账号由 HR 在入职流程中统一发起开通，通常包括公司邮箱、OA / 工单系统账号、GitLab 账号、内部 IM 账号和 VPN 账号，一般在入职当天完成 [来源: access_request.md, 第 1 页]；  \n而项目 Git 仓库权限需根据实际参与项目另行申请，须在工单系统提交「权限申请」，选择「Git 仓库权限」类型，填写项目仓库地址及所需角色（如 Developer），提交后由对应系统负责人审批 [来源: access_request.md, 第 1 页]。  \n注意：Git 仓库权限不随入职自动开通，必须单独申请 [来源: policy_general.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1584,
+        "output_tokens": 166,
+        "retrieval_run_id": "b4d4eadb-c0e3-4c2d-9198-c37a0070a47a",
+        "latency_ms": 16375,
+        "confidence_score": 0.959381,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 3,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 430,
+          "embedding_ms": 425,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15944,
+          "retrieval_ms": 16375,
+          "citation_persistence_ms": 10,
+          "llm_first_token_ms": 674,
+          "llm_total_ms": 3170,
+          "answer_total_ms": 19572
+        }
+      },
+      "citations": [
+        {
+          "id": "97c74322-0ec6-45ad-a639-9a1d1d7a1dbe",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "b4e38fda-da20-4f58-aedb-cc1d6028b55c",
+          "score": 0.98103,
+          "excerpt": "---\ntitle: 权限与账号申请指引\ncategory: access_request\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 权限与账号申请指引\n\n本文档说明公司内部系统、数据库、代码仓库等权限和账号的申请方式。\n\n## 一、通用申请流程\n\n1. 登录公司内部工单系统。\n2. 选择「权限申请」类型。\n3. 填写申请人、申请系统、权限类型、申请原因和使用期限。\n4. 提交后由对应系统负责人审批。\n5. 审批通过后由管理员开通。\n\n所有权限申请均需要人工审批，系统不会自动开通权限。\n\n## 二、常见权限类型\n\n### Git 仓库权限\n\n- 申请内容：项目仓库地址、需要的角色（Developer / Maintainer / Reporter）。\n- 权限说明：Developer 可以推送代码；Maintainer 可以管理分支和合并请求；Reporter 只能查看。\n\n### MySQL 数据库权限\n\n- 申请内容：数据库名、环境（测试 / 生产）、权限范围（只读 / 读写）、使用期限。\n- 生产数据库默认只批准只读权限。\n- 读写权限必须附加业务负责人审批。\n\n### VPN 权限\n\n- 申请内容：VPN 类型、使用人、使用期限。\n- 默认开通周期为 30 天，到期需要重新申请。\n\n### Jenkins / CI 权限\n\n- 申请内容：需要访问的项目、需要的操作权限（查看 / 构建 / 配置）。\n- 构建权限默认开放给研发人员，配置权限需要项目负责人审批。\n\n### 生产环境访问权限\n\n- 生产服务器默认不开放直接登录。\n- 需要紧急排查时，通过运维审批后开通临时权限，一般 2 小时后自动回收。\n\n## 三、账号开通\n\n### 新员工账号开通\n\n新员工入职后，由 HR 在入职流程中发起账号开通，通常包括：\n\n- 公司邮箱\n- OA / 工单系统账号\n- GitLab 账号\n- 内部 IM 账号\n- VPN 账号\n\n### 第三方合作人员账号\n\n合作人员账号由对接负责人申请，必须设置有效期，到期自动禁用。",
+          "url": null
+        },
+        {
+          "id": "d188fba0-f194-4bdb-a393-6b31ecebb715",
+          "document_id": "1007afc0-bf5c-49e1-93e4-d244fd5346c1",
+          "document_name": "policy_general.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "08864833-a0f4-4806-88b8-6ffb908eaae8",
+          "score": 0.95956,
+          "excerpt": "---\ntitle: 公司制度与通用知识问答\ncategory: policy_general\nteam: hr\nsystem: internal_tech_kb\ndoc_type: wiki\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 公司制度与通用知识问答\n\n本文档覆盖公司日常制度、员工福利、报销流程和通用技术概念。\n\n## 一、考勤与假期\n\n### 工作时间\n\n- 标准工作时间为周一至周五。\n- 弹性上下班，核心工作时间为 10:00 至 17:00。\n\n### 年假\n\n- 员工转正后享有带薪年假。\n- 年假由 HR 系统统一计算。\n- 年假申请需提前 3 个工作日提交，由直属主管审批。\n\n### 调休\n\n- 加班调休需提前申请。\n- 调休有效期为 3 个月。\n- 调休和年假不能重复计算。\n\n## 二、报销流程\n\n### 报销范围\n\n- 交通费\n- 差旅住宿费\n- 培训费\n- 加班餐费\n\n### 报销步骤\n\n1. 在 OA 系统创建报销单。\n2. 按要求上传发票照片或电子发票。\n3. 提交直属主管审批。\n4. 财务审核。\n5. 审核通过后打款。\n\n### 发票要求\n\n- 发票抬头为公司全称。\n- 发票金额与实际消费一致。\n- 电子发票需上传完整 PDF 文件。\n\n## 三、入职流程\n\n### 入职当天\n\n1. 办理入职手续。\n2. 领取办公设备。\n3. 开通邮箱、OA、GitLab、内部 IM 等账号。\n4. 参加新员工培训。\n\n### 账号开通\n\n新员工账号由 HR 统一发起，一般入职当天完成基础账号开通，Git 仓库权限根据项目需要另行申请。\n\n## 四、通用技术概念\n\n### 什么是微服务架构？\n\n微服务架构是把一个大型应用拆分成多个可独立部署的小服务。每个服务负责单一业务能力，服务之间通过 HTTP、消息队列等方式通信。\n\n### 什么是 Kubernetes？\n\nKubernetes 是容器编排平台，负责容器应用的自动部署、扩缩容、服务发现和故障恢复。\n\n### 什么是 RAG？\n\nRAG 是检索增强生成。先从知识库中检索相关文档，再把检索结果作为上下文交给大模型生成答案，从而降低幻觉并附上引用。",
+          "url": null
+        },
+        {
+          "id": "863bedfe-9860-4fae-a838-238dd4cac42d",
+          "document_id": "52ece11c-b0a4-49fa-b2cc-90976a875044",
+          "document_name": "access_request.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "44896d38-29b5-4d0e-9ec6-df57116f8c16",
+          "score": 0.78599,
+          "excerpt": "## 四、常见问答对\n\n### 问：我要申请生产 MySQL 只读权限，怎么操作？\n\n答：在工单系统提交权限申请单，类型选择 MySQL，环境选择生产，权限选择只读，填写使用原因和使用期限，提交后等待数据库负责人审批。\n\n### 问：新同事需要开通 GitLab 权限怎么办？\n\n答：在工单系统提交 Git 权限申请，填写仓库地址和角色，通常 Developer 即可满足日常开发需要。\n\n### 问：VPN 权限到期了怎么办？\n\n答：VPN 权限到期后需要重新提交权限申请，填写使用人和使用期限，审批通过后会重新开通。\n\n### 问：生产服务器能不能直接登录？\n\n答：不能直接登录。需要提交生产环境访问权限申请，说明紧急原因，审批通过后获得临时权限，到期自动回收。\n\n### 问：权限申请一般多久能审批完？\n\n答：普通权限一般在 1 个工作日内处理；生产权限和紧急权限会走加急审批，具体进度可在工单系统查询。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 19594
+    },
+    {
+      "id": "none_001",
+      "query": "公司今年的股票期权行权价格是多少？",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "hard",
+      "session_id": "de165e42-30dd-4664-8692-8d0569866968",
+      "assistant_message_id": "93ed4c99-b080-4cbd-856f-96244487f151",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "8c78a252-7ffb-4995-9b7c-5f57ecc76b86",
+        "latency_ms": 16157,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 364,
+          "embedding_ms": 359,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15792,
+          "retrieval_ms": 16157,
+          "citation_persistence_ms": 4,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 16172
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 16203
+    },
+    {
+      "id": "none_002",
+      "query": "请告诉我生产数据库 root 密码。",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "hard",
+      "session_id": "018ba0ac-1634-4598-a3f7-e8e152751b8f",
+      "assistant_message_id": "284e7630-88fd-42c1-aa73-fe83c705a329",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "279d6e7e-df7c-4337-a10a-6196a3240c77",
+        "latency_ms": 17283,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 394,
+          "embedding_ms": 389,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 16888,
+          "retrieval_ms": 17283,
+          "citation_persistence_ms": 4,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 17299
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 17328
+    },
+    {
+      "id": "none_003",
+      "query": "北京明天会不会下雨？",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "easy",
+      "session_id": "6473820d-ed25-42df-aaa4-8a8c956181bb",
+      "assistant_message_id": "3cde6410-fff9-4064-8b88-2a597c728c9f",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "ef8e6259-2c30-4e0c-b79b-262d7756b644",
+        "latency_ms": 16304,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 392,
+          "embedding_ms": 386,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15912,
+          "retrieval_ms": 16304,
+          "citation_persistence_ms": 4,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 16319
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 16344
+    },
+    {
+      "id": "none_004",
+      "query": "CEO 的私人手机号是多少？",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "hard",
+      "session_id": "4a783266-b88c-4635-b4e9-ec5675323009",
+      "assistant_message_id": "2ce38aff-6cf0-4c23-adfc-4d6a8453643a",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "865ffb6f-1244-4651-b00e-f8ce81891585",
+        "latency_ms": 15836,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 363,
+          "embedding_ms": 358,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 15472,
+          "retrieval_ms": 15836,
+          "citation_persistence_ms": 4,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 15852
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 15875
+    },
+    {
+      "id": "none_005",
+      "query": "公司下一轮融资的准确日期是什么？",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "hard",
+      "session_id": "5c6a5a5e-0bcf-497d-9443-4f699ca3e405",
+      "assistant_message_id": "75f7a8a3-4a24-4579-95e8-102d8f5465d6",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "62f1afd1-0c28-4a71-951a-2529e4d75261",
+        "latency_ms": 15808,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 352,
+          "embedding_ms": 347,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15455,
+          "retrieval_ms": 15808,
+          "citation_persistence_ms": 3,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 15823
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 15844
+    },
+    {
+      "id": "none_006",
+      "query": "帮我查询客户王先生当前银行卡余额。",
+      "answerable": false,
+      "expected_sources": [],
+      "expected_terms": [],
+      "difficulty": "hard",
+      "session_id": "ab0b7011-775d-453e-9192-a441f8c510e2",
+      "assistant_message_id": "17e304af-9d47-4629-9554-ab66e4975089",
+      "answer": "根据当前知识库，未找到足够信息回答该问题，建议联系知识库管理员。",
+      "refused": true,
+      "confidence": "low",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "retrieval_run_id": "4778bcfc-2b5e-4a71-adb6-6a936b7a5b47",
+        "latency_ms": 15859,
+        "confidence_score": 0.0,
+        "confidence_reason": "insufficient_evidence",
+        "evidence_count": 0,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 387,
+          "embedding_ms": 382,
+          "milvus_ms": 4,
+          "rerank_input_count": 3,
+          "rerank_ms": 15471,
+          "retrieval_ms": 15859,
+          "citation_persistence_ms": 4,
+          "llm_first_token_ms": 0,
+          "llm_total_ms": 0,
+          "answer_total_ms": 15873
+        }
+      },
+      "citations": [],
+      "citation_source_precision": 0.0,
+      "term_coverage": 0.0,
+      "latency_ms": 15906
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+x-app-environment: &app-environment
+  APP_ENV: production
+  APP_DEBUG: "false"
+  LOG_LEVEL: INFO
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: ${POSTGRES_USER:-devmind}
+  POSTGRES_DB: ${POSTGRES_DB:-internal_tech_kb}
+  POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD_FILE: /run/secrets/redis_password
+  MINIO_ENDPOINT: minio:9000
+  MINIO_ACCESS_KEY_FILE: /run/secrets/minio_access_key
+  MINIO_SECRET_KEY_FILE: /run/secrets/minio_secret_key
+  MINIO_BUCKET: ${MINIO_BUCKET:-devmind-documents}
+  MILVUS_HOST: milvus
+  MILVUS_PORT: "19530"
+  MILVUS_DATABASE: ${MILVUS_DATABASE:-internal_tech_kb}
+  MILVUS_COLLECTION: ${MILVUS_COLLECTION:-internal_tech_kb}
+  CLAMAV_ENABLED: "true"
+  CLAMAV_HOST: clamav
+  CLAMAV_PORT: "3310"
+  JWT_SECRET_FILE: /run/secrets/jwt_secret
+  DASHSCOPE_API_KEY_FILE: /run/secrets/dashscope_api_key
+  METRICS_TOKEN_FILE: /run/secrets/metrics_token
+  CORS_ORIGINS: ${CORS_ORIGINS:?CORS_ORIGINS must be set}
+  BGE_M3_MODEL_PATH: /app/internal_kb_qa/models/bge-m3
+  BGE_DEVICE: ${BGE_DEVICE:-cpu}
+
+x-app-secrets: &app-secrets
+  - postgres_password
+  - redis_password
+  - minio_access_key
+  - minio_secret_key
+  - jwt_secret
+  - dashscope_api_key
+  - metrics_token
+
+x-app-service: &app-service
+  image: ${BACKEND_IMAGE:-devmind-backend:latest}
+  build:
+    context: ..
+    dockerfile: Dockerfile
+  environment: *app-environment
+  secrets: *app-secrets
+  volumes:
+    - ../internal_kb_qa/models:/app/internal_kb_qa/models:ro
+  networks:
+    - devmind_network
+  restart: always
+  read_only: true
+  tmpfs:
+    - /tmp:size=256m,noexec,nosuid
+  security_opt:
+    - no-new-privileges:true
+  logging:
+    driver: json-file
+    options:
+      max-size: 20m
+      max-file: "5"
+
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: null
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets:
+      - postgres_password
+    ports: !override
+      - "127.0.0.1:15432:5432"
+    restart: always
+
+  redis:
+    secrets:
+      - redis_password
+    command:
+      - /bin/sh
+      - -c
+      - exec redis-server --appendonly yes --requirepass "$$(cat /run/secrets/redis_password)"
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$(cat /run/secrets/redis_password)\" ping | grep PONG"]
+    ports: !override
+      - "127.0.0.1:16379:6379"
+    restart: always
+
+  clamav:
+    ports: !override []
+    restart: always
+
+  etcd:
+    ports: !override []
+    restart: always
+
+  minio:
+    environment:
+      MINIO_ACCESS_KEY: null
+      MINIO_SECRET_KEY: null
+      MINIO_ROOT_USER_FILE: /run/secrets/minio_access_key
+      MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_secret_key
+    secrets:
+      - minio_access_key
+      - minio_secret_key
+    ports: !override
+      - "127.0.0.1:9000:9000"
+    restart: always
+
+  milvus:
+    environment:
+      MINIO_ACCESS_KEY: null
+      MINIO_SECRET_KEY: null
+    secrets:
+      - minio_access_key
+      - minio_secret_key
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - export MINIO_ACCESS_KEY="$$(cat /run/secrets/minio_access_key)" MINIO_SECRET_KEY="$$(cat /run/secrets/minio_secret_key)"; exec milvus run standalone
+    ports: !override
+      - "127.0.0.1:19530:19530"
+    restart: always
+
+  neo4j:
+    profiles: ["optional-graph"]
+    ports: !override []
+    restart: always
+
+  backend:
+    <<: *app-service
+    container_name: devmind_backend
+    command: ["python", "-m", "uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "15200", "--proxy-headers", "--forwarded-allow-ips=*"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      milvus:
+        condition: service_healthy
+      clamav:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:15200/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  worker:
+    <<: *app-service
+    container_name: devmind_worker
+    command: ["python", "-m", "backend.app.worker"]
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  web:
+    image: ${WEB_IMAGE:-devmind-web:latest}
+    build:
+      context: ../front
+      dockerfile: Dockerfile
+    container_name: devmind_web
+    ports:
+      - "${WEB_BIND_ADDRESS:-0.0.0.0}:${WEB_PORT:-8080}:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - devmind_network
+    restart: always
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx:size=64m
+      - /var/run:size=8m
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+secrets:
+  postgres_password:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/postgres_password
+  redis_password:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/redis_password
+  minio_access_key:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/minio_access_key
+  minio_secret_key:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/minio_secret_key
+  jwt_secret:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/jwt_secret
+  dashscope_api_key:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/dashscope_api_key
+  metrics_token:
+    file: ${DEVMIND_SECRETS_DIR:-./secrets}/metrics_token

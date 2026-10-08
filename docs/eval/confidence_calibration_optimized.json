@@ -1,0 +1,82 @@
+{
+  "selected": "composite",
+  "formula": "0.75*top1 + 0.15*top2 + 0.10*top3 + 0.05*(top1-top2)",
+  "candidates": {
+    "current_mean": {
+      "thresholds": {
+        "high": 0.75,
+        "medium": 0.5
+      },
+      "distribution": {
+        "low": 32,
+        "medium": 6,
+        "high": 2
+      },
+      "high_precision": 1.0,
+      "answerable_non_low_rate": 0.23529411764705882,
+      "unanswerable_low_rate": 1.0,
+      "answerable_low_ids": [
+        "tech_001",
+        "tech_002",
+        "tech_003",
+        "tech_005",
+        "tech_006",
+        "tech_007",
+        "tech_008",
+        "tech_009",
+        "tech_010",
+        "access_002",
+        "access_003",
+        "access_004",
+        "access_005",
+        "incident_001",
+        "incident_003",
+        "incident_005",
+        "policy_001",
+        "policy_002",
+        "policy_003",
+        "policy_004",
+        "policy_005",
+        "ticket_001",
+        "ticket_002",
+        "ticket_004",
+        "feedback_001",
+        "feedback_003"
+      ]
+    },
+    "top1": {
+      "thresholds": {
+        "high": 0.8,
+        "medium": 0.12
+      },
+      "distribution": {
+        "medium": 7,
+        "high": 26,
+        "low": 7
+      },
+      "high_precision": 1.0,
+      "answerable_non_low_rate": 0.9705882352941176,
+      "unanswerable_low_rate": 1.0,
+      "answerable_low_ids": [
+        "policy_005"
+      ]
+    },
+    "composite": {
+      "thresholds": {
+        "high": 0.68,
+        "medium": 0.09
+      },
+      "distribution": {
+        "medium": 9,
+        "high": 24,
+        "low": 7
+      },
+      "high_precision": 1.0,
+      "answerable_non_low_rate": 0.9705882352941176,
+      "unanswerable_low_rate": 1.0,
+      "answerable_low_ids": [
+        "policy_005"
+      ]
+    }
+  }
+}

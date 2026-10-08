@@ -1,0 +1,14 @@
+.git
+.idea
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.playwright-mcp
+backups
+docker/secrets
+front/node_modules
+front/dist
+internal_kb_qa/models
+docs/eval/*.json

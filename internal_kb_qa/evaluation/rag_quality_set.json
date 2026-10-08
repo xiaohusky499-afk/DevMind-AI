@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "description": "DevMind AI RAG 质量 Pilot：34 条可回答问题与 6 条无答案问题",
+  "items": [
+    {"id":"tech_001","query":"Python 项目第一次拉下来后如何初始化环境？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["uv sync","项目根目录"],"difficulty":"easy"},
+    {"id":"tech_002","query":"Maven 提示 Could not transfer artifact 应检查什么？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["私服地址","账号无权限"],"difficulty":"easy"},
+    {"id":"tech_003","query":"Git 推送出现 Permission denied publickey 怎么排查？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["SSH key","ssh -T"],"difficulty":"easy"},
+    {"id":"tech_004","query":"接口返回 503 Service Unavailable 时应该怎么排查？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["上游服务","健康检查","网关日志"],"difficulty":"easy"},
+    {"id":"tech_005","query":"接口请求超时的排查顺序是什么？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["服务端是否收到请求","数据库慢查询","上游接口"],"difficulty":"medium"},
+    {"id":"tech_006","query":"数据库慢查询应该如何处理？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["慢查询日志","EXPLAIN","索引"],"difficulty":"easy"},
+    {"id":"tech_007","query":"Redis 连接超时常见原因有哪些？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["Redis 未启动","端口","连接数"],"difficulty":"easy"},
+    {"id":"tech_008","query":"前端请求后端出现跨域问题怎么处理？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["CORS","Vite","代理"],"difficulty":"easy"},
+    {"id":"tech_009","query":"Docker 容器启动后立刻退出如何定位原因？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["docker logs","端口冲突","环境变量"],"difficulty":"easy"},
+    {"id":"tech_010","query":"Spring Boot 创建 dataSource Bean 失败要检查哪些地方？","answerable":true,"expected_sources":["tech.md"],"expected_terms":["application.yml","数据库账号","Caused by"],"difficulty":"medium"},
+
+    {"id":"access_001","query":"如何申请生产 MySQL 只读权限？","answerable":true,"expected_sources":["access_request.md"],"expected_terms":["工单系统","生产","只读","使用期限"],"difficulty":"easy"},
+    {"id":"access_002","query":"Git 仓库 Developer 和 Reporter 权限有什么区别？","answerable":true,"expected_sources":["access_request.md"],"expected_terms":["Developer","推送代码","Reporter","只能查看"],"difficulty":"medium"},
+    {"id":"access_003","query":"VPN 权限默认可以使用多久？","answerable":true,"expected_sources":["access_request.md"],"expected_terms":["30 天","重新申请"],"difficulty":"easy"},
+    {"id":"access_004","query":"生产服务器紧急排查权限会保留多长时间？","answerable":true,"expected_sources":["access_request.md"],"expected_terms":["运维审批","临时权限","2 小时"],"difficulty":"easy"},
+    {"id":"access_005","query":"第三方合作人员账号需要满足什么要求？","answerable":true,"expected_sources":["access_request.md"],"expected_terms":["对接负责人","有效期","自动禁用"],"difficulty":"medium"},
+
+    {"id":"incident_001","query":"核心业务完全不可用属于什么级别故障？","answerable":true,"expected_sources":["incident.md"],"expected_terms":["P0","5 分钟内响应"],"difficulty":"easy"},
+    {"id":"incident_002","query":"核心接口大面积超时的响应时限是多少？","answerable":true,"expected_sources":["incident.md"],"expected_terms":["P1","15 分钟"],"difficulty":"easy"},
+    {"id":"incident_003","query":"提交线上故障时必须提供哪些信息？","answerable":true,"expected_sources":["incident.md"],"expected_terms":["发生时间","影响范围","最近是否有发布","联系方式"],"difficulty":"medium"},
+    {"id":"incident_004","query":"发布后半小时内出现故障时应该怎么处理？","answerable":true,"expected_sources":["incident.md"],"expected_terms":["优先回滚","保留当前问题版本","15 分钟"],"difficulty":"medium"},
+    {"id":"incident_005","query":"发现线上数据可能丢失时能否自行恢复？","answerable":true,"expected_sources":["incident.md"],"expected_terms":["P0","停止相关写入","不要自行恢复"],"difficulty":"hard"},
+
+    {"id":"policy_001","query":"公司的核心工作时间是几点到几点？","answerable":true,"expected_sources":["policy_general.md"],"expected_terms":["10:00","17:00"],"difficulty":"easy"},
+    {"id":"policy_002","query":"年假需要提前多久申请？","answerable":true,"expected_sources":["policy_general.md"],"expected_terms":["3 个工作日","直属主管"],"difficulty":"easy"},
+    {"id":"policy_003","query":"调休的有效期是多少？","answerable":true,"expected_sources":["policy_general.md"],"expected_terms":["3 个月"],"difficulty":"easy"},
+    {"id":"policy_004","query":"电子发票报销有什么要求？","answerable":true,"expected_sources":["policy_general.md"],"expected_terms":["公司全称","金额","完整 PDF"],"difficulty":"easy"},
+    {"id":"policy_005","query":"RAG 是什么，它为什么可以降低幻觉？","answerable":true,"expected_sources":["policy_general.md"],"expected_terms":["检索增强生成","知识库","上下文","引用"],"difficulty":"medium"},
+
+    {"id":"ticket_001","query":"工单状态 pending 代表什么？","answerable":true,"expected_sources":["ticket_inquiry.md"],"expected_terms":["待处理","等待处理人接单"],"difficulty":"easy"},
+    {"id":"ticket_002","query":"普通工单多久没处理可以催办？","answerable":true,"expected_sources":["ticket_inquiry.md"],"expected_terms":["1 个工作日","催办"],"difficulty":"easy"},
+    {"id":"ticket_003","query":"紧急工单超过多久未响应应联系值班负责人？","answerable":true,"expected_sources":["ticket_inquiry.md"],"expected_terms":["30 分钟","值班负责人"],"difficulty":"easy"},
+    {"id":"ticket_004","query":"工单显示 done 但问题没解决怎么办？","answerable":true,"expected_sources":["ticket_inquiry.md"],"expected_terms":["原工单","补充信息","重新打开"],"difficulty":"medium"},
+
+    {"id":"feedback_001","query":"知识库答案有错误应该怎么反馈？","answerable":true,"expected_sources":["complaint_suggestion.md"],"expected_terms":["点踩","错误描述","文档负责人"],"difficulty":"easy"},
+    {"id":"feedback_002","query":"投诉工单要求多久响应？","answerable":true,"expected_sources":["complaint_suggestion.md"],"expected_terms":["1 个工作日","响应"],"difficulty":"easy"},
+    {"id":"feedback_003","query":"可以通过哪些渠道给知识库提建议？","answerable":true,"expected_sources":["complaint_suggestion.md"],"expected_terms":["反馈入口","工单系统","团队周会"],"difficulty":"medium"},
+
+    {"id":"multi_001","query":"生产接口发布后开始返回 503，应该如何排查并决定是否回滚？","answerable":true,"expected_sources":["tech.md","incident.md"],"expected_terms":["健康检查","网关日志","30 分钟","优先回滚"],"difficulty":"hard"},
+    {"id":"multi_002","query":"新员工入职后如何获得基础账号和项目 Git 仓库权限？","answerable":true,"expected_sources":["policy_general.md","access_request.md"],"expected_terms":["HR","入职当天","工单系统","仓库地址"],"difficulty":"hard"},
+
+    {"id":"none_001","query":"公司今年的股票期权行权价格是多少？","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"hard"},
+    {"id":"none_002","query":"请告诉我生产数据库 root 密码。","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"hard"},
+    {"id":"none_003","query":"北京明天会不会下雨？","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"easy"},
+    {"id":"none_004","query":"CEO 的私人手机号是多少？","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"hard"},
+    {"id":"none_005","query":"公司下一轮融资的准确日期是什么？","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"hard"},
+    {"id":"none_006","query":"帮我查询客户王先生当前银行卡余额。","answerable":false,"expected_sources":[],"expected_terms":[],"difficulty":"hard"}
+  ]
+}

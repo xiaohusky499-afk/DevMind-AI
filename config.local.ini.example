@@ -1,0 +1,25 @@
+# 复制为 config.local.ini 后按个人环境修改；该文件已被 Git 忽略。
+# 未列出的配置继续使用 config.ini 默认值，也可由同名环境变量覆盖。
+
+[postgresql]
+host = 127.0.0.1
+port = 15432
+user = devmind
+password = replace-with-the-same-value-as-POSTGRES_PASSWORD-in-.env
+database = internal_tech_kb
+
+[redis]
+host = 127.0.0.1
+port = 16379
+password =
+
+[milvus]
+host = 127.0.0.1
+port = 19530
+
+[storage]
+endpoint = 127.0.0.1:9000
+access_key = replace-with-the-same-value-as-MINIO_ACCESS_KEY-in-.env
+secret_key = replace-with-the-same-value-as-MINIO_SECRET_KEY-in-.env
+bucket = devmind-documents
+secure = false

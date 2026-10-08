@@ -1,0 +1,625 @@
+{
+  "version": "1.0.0",
+  "knowledge_base_id": "cae2c07c-d192-4b90-90f2-f51da1a5b8ef",
+  "summary": {
+    "case_count": 10,
+    "answerable_count": 10,
+    "unanswerable_count": 0,
+    "answerable_answer_rate": 1.0,
+    "unanswerable_refusal_rate": 0.0,
+    "citation_trace_rate": 1.0,
+    "citation_source_precision": 0.9,
+    "answer_term_coverage": 0.9666666666666666,
+    "high_confidence_precision": 1.0,
+    "confidence_distribution": {
+      "high": 8,
+      "medium": 2,
+      "low": 0
+    },
+    "latency_ms": {
+      "mean": 10419.0,
+      "max": 12985
+    }
+  },
+  "cases": [
+    {
+      "id": "tech_001",
+      "query": "Python 项目第一次拉下来后如何初始化环境？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "uv sync",
+        "项目根目录"
+      ],
+      "difficulty": "easy",
+      "session_id": "8a9eacc8-365d-427f-a4f3-b2c80e22894b",
+      "assistant_message_id": "68b66870-8325-4e8e-8f4f-54cdd1bab37a",
+      "answer": "Python 项目第一次拉下来后，初始化环境的推荐方式是使用 `uv` 工具同步依赖：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n若项目不支持或未配置 `uv`，则使用标准 `venv` 方式：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate  # Windows\n# 或 .venv/bin/activate  # macOS/Linux\npip install -r requirements.txt\n```\n\n注意：依赖安装慢时，应优先配置公司内网 PyPI 镜像源 [来源: tech.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 137,
+        "retrieval_run_id": "d6d67ea9-0fda-4113-94d2-bd52c269813d",
+        "latency_ms": 9471,
+        "confidence_score": 0.572304,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 2211,
+          "embedding_ms": 2183,
+          "milvus_ms": 27,
+          "rerank_input_count": 3,
+          "rerank_ms": 7259,
+          "retrieval_ms": 9471,
+          "citation_persistence_ms": 14,
+          "llm_first_token_ms": 1280,
+          "llm_total_ms": 3376,
+          "answer_total_ms": 12917
+        }
+      },
+      "citations": [
+        {
+          "id": "e5f94010-9b39-4a76-858f-a8127f57596e",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1c029631-1cd9-4918-8e5b-77da06556019",
+          "score": 0.71538,
+          "excerpt": "---\ntitle: 研发技术咨询高频问题与排查手册\ncategory: tech\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 研发技术咨询高频问题与排查手册\n\n本手册面向研发、测试、运维人员，覆盖环境安装、依赖配置、常见报错、接口调试和部署发布等高频技术问题。\n\n## 一、环境安装与依赖配置\n\n### 1. Python 项目环境初始化\n\n使用 uv 管理 Python 依赖的推荐步骤：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n不使用 uv 时，使用 venv：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements.txt\n```\n\n常见问题：依赖安装慢时，优先配置公司内网 PyPI 镜像源。\n\n### 2. Java / Maven 项目配置\n\n- JDK 版本以项目根目录 `.java-version` 或 `pom.xml` 为准。\n- Maven 私服地址统一配置在 `~/.m2/settings.xml` 的 `mirrors` 节点中。\n- 常见错误：`Could not transfer artifact`，通常表示私服地址不可达或账号无权限。\n\n### 3. Node / npm 项目配置\n\n- 前端项目统一使用 npm。\n- 首次运行执行 `npm install`，如果出现依赖冲突，删除 `node_modules` 和 `package-lock.json` 后重新安装。\n- 公司内网优先使用内部 npm registry。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 12985
+    },
+    {
+      "id": "tech_002",
+      "query": "Maven 提示 Could not transfer artifact 应检查什么？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "私服地址",
+        "账号无权限"
+      ],
+      "difficulty": "easy",
+      "session_id": "1189c71d-ec90-4007-8044-913e83117f99",
+      "assistant_message_id": "61a78953-9d6e-4f80-bef4-baab48a70073",
+      "answer": "Maven 提示 `Could not transfer artifact` 时，应检查以下两项：\n\n1. Maven 私服地址是否可达：确认 `~/.m2/settings.xml` 中 `mirrors` 节点配置的私服地址网络连通且服务正常 [来源: tech.md, 第 1 页]；  \n2. 当前账号是否具备对应仓库的访问权限：该错误常见于账号无权限访问指定 artifact 所在的私有仓库 [来源: tech.md, 第 1 页]。\n\n⚠️ 注意：涉及私服权限调整或网络策略变更属于生产基础设施范畴，须通过 IT 服务台提交正式工单审批，不可自行修改 `settings.xml` 或绕过认证机制。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 155,
+        "retrieval_run_id": "ebea7fdf-0d8b-4e95-8340-05e0df81179f",
+        "latency_ms": 6047,
+        "confidence_score": 0.720895,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 188,
+          "embedding_ms": 182,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5858,
+          "retrieval_ms": 6047,
+          "citation_persistence_ms": 11,
+          "llm_first_token_ms": 759,
+          "llm_total_ms": 3062,
+          "answer_total_ms": 9137
+        }
+      },
+      "citations": [
+        {
+          "id": "3abe9f1b-1627-4fa9-bbb8-937b537dead0",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "1c029631-1cd9-4918-8e5b-77da06556019",
+          "score": 0.90112,
+          "excerpt": "---\ntitle: 研发技术咨询高频问题与排查手册\ncategory: tech\nteam: infra\nsystem: internal_tech_kb\ndoc_type: faq\nversion: 1.0\nsecurity_level: public\nlast_updated: 2026-08-22\n---\n\n# 研发技术咨询高频问题与排查手册\n\n本手册面向研发、测试、运维人员，覆盖环境安装、依赖配置、常见报错、接口调试和部署发布等高频技术问题。\n\n## 一、环境安装与依赖配置\n\n### 1. Python 项目环境初始化\n\n使用 uv 管理 Python 依赖的推荐步骤：\n\n```shell\ncd 项目根目录\nuv sync\n```\n\n不使用 uv 时，使用 venv：\n\n```shell\npython -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements.txt\n```\n\n常见问题：依赖安装慢时，优先配置公司内网 PyPI 镜像源。\n\n### 2. Java / Maven 项目配置\n\n- JDK 版本以项目根目录 `.java-version` 或 `pom.xml` 为准。\n- Maven 私服地址统一配置在 `~/.m2/settings.xml` 的 `mirrors` 节点中。\n- 常见错误：`Could not transfer artifact`，通常表示私服地址不可达或账号无权限。\n\n### 3. Node / npm 项目配置\n\n- 前端项目统一使用 npm。\n- 首次运行执行 `npm install`，如果出现依赖冲突，删除 `node_modules` 和 `package-lock.json` 后重新安装。\n- 公司内网优先使用内部 npm registry。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9172
+    },
+    {
+      "id": "tech_003",
+      "query": "Git 推送出现 Permission denied publickey 怎么排查？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "SSH key",
+        "ssh -T"
+      ],
+      "difficulty": "easy",
+      "session_id": "8c918915-c4b8-4a6d-8b1a-1ffbb83bd1c8",
+      "assistant_message_id": "d7062b36-2147-42ab-95df-9fd987c6d364",
+      "answer": "Git 推送出现 `Permission denied (publickey)` 的排查步骤如下：\n\n1. 确认本机已生成 SSH key：执行 `ssh-keygen -t rsa -b 4096` [来源: tech.md, 第 1 页]。  \n2. 将生成的公钥（默认为 `~/.ssh/id_rsa.pub`）内容完整添加到 GitLab / GitHub 账号的 **SSH Keys** 设置中 [来源: tech.md, 第 1 页]。  \n3. 使用命令 `ssh -T git@内部git地址` 测试 SSH 连通性，确认认证成功 [来源: tech.md, 第 1 页]。  \n4. 确认本地仓库的远程地址使用的是 SSH 协议（格式如 `git@内部git地址:group/project.git`），而非 HTTPS 协议 [来源: tech.md, 第 1 页]。\n\n⚠️ 注意：所有操作需确保当前用户与 Git 账号权限一致；若在 CI/CD 环境中出现该问题，还需检查运行环境是否已配置对应 SSH key 及 agent 转发。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 771,
+        "output_tokens": 253,
+        "retrieval_run_id": "99bce5f8-1cd7-42d6-a488-e2b501c75f88",
+        "latency_ms": 6060,
+        "confidence_score": 0.781351,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 202,
+          "embedding_ms": 196,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 5857,
+          "retrieval_ms": 6060,
+          "citation_persistence_ms": 10,
+          "llm_first_token_ms": 519,
+          "llm_total_ms": 6169,
+          "answer_total_ms": 12255
+        }
+      },
+      "citations": [
+        {
+          "id": "7ad79968-b24a-465c-bb4f-35529df4c4e9",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.97669,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 12281
+    },
+    {
+      "id": "tech_004",
+      "query": "接口返回 503 Service Unavailable 时应该怎么排查？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "上游服务",
+        "健康检查",
+        "网关日志"
+      ],
+      "difficulty": "easy",
+      "session_id": "100d82b5-45b6-4bb4-95e8-e4db1bf412a2",
+      "assistant_message_id": "421d2ebe-1f5c-44e2-a1d6-6f10ff5b2e9e",
+      "answer": "接口返回 503 Service Unavailable 时，应按以下顺序排查：\n\n1. **检查上游服务状态**：确认依赖的上游服务是否已启动且健康 [来源: tech.md, 第 1 页]。  \n2. **检查服务资源负载**：确认服务线程池是否被打满（如 Tomcat 线程耗尽、Spring Boot `ThreadPoolTaskExecutor` 拒绝任务等）[来源: tech.md, 第 1 页]。  \n3. **检查网关或负载均衡层**：确认 API 网关或负载均衡器是否有可用后端节点，是否存在节点下线或健康检查失败 [来源: tech.md, 第 1 页]。  \n4. **确认服务发布状态**：核实该服务是否正处于发布、滚动重启或缩容过程中 [来源: tech.md, 第 1 页]。  \n5. **进一步定位**：  \n   - 先查看服务自身的健康检查端点（如 `/actuator/health`）是否返回 `UP`；  \n   - 再查阅网关日志和服务日志，比对时间点与错误特征；  \n   - 最后结合最近变更（如发布、配置更新）综合判断 [来源: tech.md, 第 1 页]。\n\n⚠️ 若涉及线上核心业务不可用，请立即按《故障上报与应急响应规范》进行分级与上报，P0/P1 级故障需严格遵循 5 分钟/15 分钟响应要求 [来源: incident.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 1363,
+        "output_tokens": 339,
+        "retrieval_run_id": "bc32d574-c100-421b-bb23-401064fb2a47",
+        "latency_ms": 6025,
+        "confidence_score": 0.887155,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 207,
+          "embedding_ms": 201,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5817,
+          "retrieval_ms": 6025,
+          "citation_persistence_ms": 11,
+          "llm_first_token_ms": 681,
+          "llm_total_ms": 5736,
+          "answer_total_ms": 11790
+        }
+      },
+      "citations": [
+        {
+          "id": "821bba9b-c26c-43f5-bef3-d42200453ae1",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.99449,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        },
+        {
+          "id": "f00cf0e1-8353-4e6d-a340-60bba6fd7b4f",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "53553d56-07b0-4b21-a2a8-0d52cf1f938c",
+          "score": 0.91561,
+          "excerpt": "---\ntitle: 故障上报与应急响应规范\ncategory: incident\nteam: ops\nsystem: internal_tech_kb\ndoc_type: runbook\nversion: 1.0\nsecurity_level: team\nlast_updated: 2026-08-22\n---\n\n# 故障上报与应急响应规范\n\n本文档用于指导线上故障的发现、上报、响应和复盘。\n\n## 一、故障分级\n\n### P0 级故障\n\n- 核心业务完全不可用。\n- 数据丢失或数据错误影响范围大。\n- 安全事件造成严重泄露。\n\n响应要求：立即拉群，5 分钟内响应，相关负责人必须介入。\n\n### P1 级故障\n\n- 核心业务部分不可用。\n- 核心接口大面积超时。\n- 关键任务执行失败。\n\n响应要求：15 分钟内响应，启动紧急排查。\n\n### P2 级故障\n\n- 非核心功能异常。\n- 少量用户受影响。\n- 非关键接口异常。\n\n响应要求：2 小时内响应，正常排期处理。\n\n### P3 级问题\n\n- 轻微异常。\n- 不影响主流程。\n\n响应要求：正常工单处理。\n\n## 二、故障上报内容\n\n提交故障时必须包含以下信息：\n\n1. 发生时间\n2. 影响范围\n3. 影响系统或服务\n4. 故障现象\n5. 最近是否有发布或配置变更\n6. 已尝试的处理动作\n7. 紧急联系方式\n\n示例模板：\n\n```text\n时间：2026-08-22 14:30\n系统：订单服务\n影响范围：全部用户无法下单\n现象：接口持续返回 503\n最近变更：14:00 发布了 V1.8.0\n已尝试动作：重启了两个实例，未恢复\n联系方式：138****1234\n```\n\n## 三、应急响应流程\n\n1. 确认故障并分级。\n2. 通知值班负责人和相关系统负责人。\n3. 判断是否需要紧急回滚。\n4. 优先恢复业务，再定位根因。\n5. 处理过程中在故障群同步进展。\n6. 恢复后确认监控指标正常。\n7. 24 小时内完成故障复盘报告。\n\n## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 0.5,
+      "term_coverage": 1.0,
+      "latency_ms": 11813
+    },
+    {
+      "id": "tech_005",
+      "query": "接口请求超时的排查顺序是什么？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "服务端是否收到请求",
+        "数据库慢查询",
+        "上游接口"
+      ],
+      "difficulty": "medium",
+      "session_id": "8c29ce11-4db5-4dc4-b6b1-e7b0995c9185",
+      "assistant_message_id": "69b703aa-bb67-4b77-b138-3cbc5f27d2a2",
+      "answer": "接口请求超时的排查顺序如下：\n\n1. 确认服务端是否收到请求；  \n2. 查看服务日志中的耗时情况；  \n3. 检查数据库是否存在慢查询；  \n4. 检查 Redis 连接情况；  \n5. 检查上游接口的响应时间。  \n\n以上步骤需逐段定位耗时原因 [来源: tech.md, 第 5 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 713,
+        "output_tokens": 95,
+        "retrieval_run_id": "72e629ef-ba19-4e99-a2bc-2c12121b1bf6",
+        "latency_ms": 5860,
+        "confidence_score": 0.741118,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 183,
+          "embedding_ms": 176,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 5676,
+          "retrieval_ms": 5860,
+          "citation_persistence_ms": 11,
+          "llm_first_token_ms": 597,
+          "llm_total_ms": 2701,
+          "answer_total_ms": 8590
+        }
+      },
+      "citations": [
+        {
+          "id": "25b6f64b-f505-431c-8516-14049132d861",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.9264,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 0.6666666666666666,
+      "latency_ms": 8625
+    },
+    {
+      "id": "tech_006",
+      "query": "数据库慢查询应该如何处理？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "慢查询日志",
+        "EXPLAIN",
+        "索引"
+      ],
+      "difficulty": "easy",
+      "session_id": "4a39540f-5dad-4677-a339-ca61ac3dbaec",
+      "assistant_message_id": "d5adf9d1-0e54-4f2b-9dd7-fba6449809a0",
+      "answer": "数据库慢查询应按以下步骤处理：\n\n1. 先开启慢查询日志，找到执行时间最长的 SQL；  \n2. 使用 `EXPLAIN` 分析该 SQL 的执行计划；  \n3. 确认是否缺少索引；  \n4. 最后优化 SQL 或添加索引 [来源: tech.md, 第 1 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 966,
+        "output_tokens": 78,
+        "retrieval_run_id": "62dc5067-4129-4c3d-bf7a-b61e91b86ed1",
+        "latency_ms": 6429,
+        "confidence_score": 0.797469,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 2,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 207,
+          "embedding_ms": 200,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6221,
+          "retrieval_ms": 6429,
+          "citation_persistence_ms": 11,
+          "llm_first_token_ms": 973,
+          "llm_total_ms": 2710,
+          "answer_total_ms": 9170
+        }
+      },
+      "citations": [
+        {
+          "id": "6a0eb783-abb0-478d-94b2-2d0f58d59217",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.93986,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        },
+        {
+          "id": "8f54bf4e-8124-44cf-ab72-694b0eecce63",
+          "document_id": "04aa4215-310b-4142-bca5-ed24284f2eba",
+          "document_name": "incident.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "8604f8dd-f80e-403f-8671-60cc92e44e1c",
+          "score": 0.45579,
+          "excerpt": "## 四、回滚原则\n\n- 如果故障发生在发布后 30 分钟内，优先回滚。\n- 回滚必须保留当前问题版本，便于后续分析。\n- 回滚后观察核心指标至少 15 分钟。\n\n## 五、常见问答对\n\n### 问：线上服务大面积超时怎么办？\n\n答：立即上报 P0/P1 故障，不要自行反复重启。先确认是否有新发布，再通知运维和值班负责人，优先恢复业务。\n\n### 问：刚发布后服务一直重启，怎么处理？\n\n答：立即回滚到上一个稳定版本，保留当前问题日志和镜像版本，回滚后通知相关开发负责人排查。\n\n### 问：生产数据库主从延迟突然变大怎么办？\n\n答：先确认主库是否有大批量写入或慢查询，再确认从库机器负载和网络。影响线上业务时升级为 P1 故障处理。\n\n### 问：发现数据可能丢失怎么办？\n\n答：立即上报 P0 故障，停止相关写入操作，通知 DBA 和运维，检查备份和 binlog，不要自行恢复数据。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 0.5,
+      "term_coverage": 1.0,
+      "latency_ms": 9204
+    },
+    {
+      "id": "tech_007",
+      "query": "Redis 连接超时常见原因有哪些？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "Redis 未启动",
+        "端口",
+        "连接数"
+      ],
+      "difficulty": "easy",
+      "session_id": "31ebe173-2f7b-4476-a870-c9e706f0aaac",
+      "assistant_message_id": "fe3a78fe-8b53-489e-afa6-cf53055e0965",
+      "answer": "Redis 连接超时的常见原因包括：Redis 未启动、端口不通、密码错误、连接数打满、网络抖动 [来源: tech.md, 第 5 页]。  \n建议首先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性，以快速定位是否为网络或服务可用性问题 [来源: tech.md, 第 5 页]。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 712,
+        "output_tokens": 96,
+        "retrieval_run_id": "fcfc679b-9b7a-42b5-b18e-5e17e5a410ed",
+        "latency_ms": 6598,
+        "confidence_score": 0.789335,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 196,
+          "embedding_ms": 190,
+          "milvus_ms": 5,
+          "rerank_input_count": 3,
+          "rerank_ms": 6400,
+          "retrieval_ms": 6598,
+          "citation_persistence_ms": 10,
+          "llm_first_token_ms": 672,
+          "llm_total_ms": 2817,
+          "answer_total_ms": 9443
+        }
+      },
+      "citations": [
+        {
+          "id": "fe143f52-3acd-4aa6-8228-e9bf6bc972f0",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.98667,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9469
+    },
+    {
+      "id": "tech_008",
+      "query": "前端请求后端出现跨域问题怎么处理？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "CORS",
+        "Vite",
+        "代理"
+      ],
+      "difficulty": "easy",
+      "session_id": "2def0161-8568-45eb-a69d-bcb57031ab6a",
+      "assistant_message_id": "0ae31d3c-81b0-46e7-80fb-d99a6602c88a",
+      "answer": "前端访问后端出现跨域问题，应通过后端增加 CORS 配置，允许前端域名；开发环境也可让 Vite 代理 `/api` 请求到后端服务 [来源: tech.md, 第 5 页]。  \n⚠️ 注意：生产环境必须通过后端正式配置 CORS 策略，不可依赖开发代理；涉及线上变更需走发布审批流程。",
+      "refused": false,
+      "confidence": "medium",
+      "usage": {
+        "input_tokens": 716,
+        "output_tokens": 85,
+        "retrieval_run_id": "02821bb5-b31f-433a-a577-9e5ad0c99ea6",
+        "latency_ms": 7174,
+        "confidence_score": 0.562977,
+        "confidence_reason": "limited_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 234,
+          "embedding_ms": 227,
+          "milvus_ms": 6,
+          "rerank_input_count": 3,
+          "rerank_ms": 6939,
+          "retrieval_ms": 7174,
+          "citation_persistence_ms": 23,
+          "llm_first_token_ms": 608,
+          "llm_total_ms": 2520,
+          "answer_total_ms": 9740
+        }
+      },
+      "citations": [
+        {
+          "id": "f11f93de-4241-47e5-b729-fa8e7bfdac43",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.70372,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 9781
+    },
+    {
+      "id": "tech_009",
+      "query": "Docker 容器启动后立刻退出如何定位原因？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "docker logs",
+        "端口冲突",
+        "环境变量"
+      ],
+      "difficulty": "easy",
+      "session_id": "60a8402f-4b91-4f6c-b242-5b1c246bd8ad",
+      "assistant_message_id": "9e958637-cef1-416e-b558-a28181e41260",
+      "answer": "执行 `docker logs 容器名` 查看启动日志，重点查看最后几行报错；常见原因包括端口冲突、环境变量缺失、依赖服务未启动 [来源: tech.md, 第 5 页]。  \n如涉及生产环境变更，请务必遵循《生产发布管理流程》完成审批与回滚预案备案。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 714,
+        "output_tokens": 74,
+        "retrieval_run_id": "adda206d-b33f-4c3f-b306-cdd5b0f328e4",
+        "latency_ms": 6449,
+        "confidence_score": 0.788201,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 2,
+          "rewrite_ms": 0,
+          "search_ms": 236,
+          "embedding_ms": 228,
+          "milvus_ms": 8,
+          "rerank_input_count": 3,
+          "rerank_ms": 6211,
+          "retrieval_ms": 6449,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 636,
+          "llm_total_ms": 2265,
+          "answer_total_ms": 8749
+        }
+      },
+      "citations": [
+        {
+          "id": "fc01daf6-2801-40ba-af17-3ca23a10e154",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "e3cb5ed4-8d43-4591-8a3f-355276bad645",
+          "score": 0.98525,
+          "excerpt": "## 四、部署与发布\n\n### Docker 部署后端服务\n\n1. 构建镜像：`docker build -t 应用名:版本号 .`\n2. 启动依赖服务：`docker compose up -d`\n3. 启动应用容器。\n4. 发布后检查 `/health` 健康检查接口。\n5. 观察应用日志，确认无启动异常。\n\n### 发布失败处理\n\n- 先确认构建日志中第一个报错位置。\n- 再确认环境变量和配置文件是否完整。\n- 发布失败时优先回滚到上一个稳定版本。\n\n## 五、常见技术问答对\n\n### 问：本地启动后端服务端口被占用怎么办？\n\n答：先执行 `netstat -ano | findstr :端口号` 找到占用进程，再确认进程是否可关闭；如果可关闭，使用 `taskkill /PID 进程号 /F` 结束进程。\n\n### 问：接口请求超时应该怎么排查？\n\n答：先确认服务端是否收到请求，再查看服务日志耗时、数据库慢查询、Redis 连接情况和上游接口响应时间，逐段定位耗时。\n\n### 问：数据库慢查询怎么处理？\n\n答：先开启慢查询日志，找到执行时间最长的 SQL，再使用 `EXPLAIN` 分析执行计划，确认是否缺少索引，最后优化 SQL 或添加索引。\n\n### 问：Redis 连接超时是什么原因？\n\n答：常见原因包括 Redis 未启动、端口不通、密码错误、连接数打满、网络抖动。先使用 `redis-cli -h 地址 -p 端口 ping` 检查连通性。\n\n### 问：前端访问后端跨域怎么办？\n\n答：后端增加 CORS 配置，允许前端域名；开发环境也可以让 Vite 代理 `/api` 请求到后端服务。\n\n### 问：Docker 容器启动后立刻退出怎么排查？\n\n答：执行 `docker logs 容器名` 查看启动日志，重点看最后几行报错；常见原因有端口冲突、环境变量缺失、依赖服务未启动。",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 8782
+    },
+    {
+      "id": "tech_010",
+      "query": "Spring Boot 创建 dataSource Bean 失败要检查哪些地方？",
+      "answerable": true,
+      "expected_sources": [
+        "tech.md"
+      ],
+      "expected_terms": [
+        "application.yml",
+        "数据库账号",
+        "Caused by"
+      ],
+      "difficulty": "medium",
+      "session_id": "9166398b-40cc-4bb8-8d0a-ad965884c1ef",
+      "assistant_message_id": "075f6339-94e8-43b2-b6b3-ad5fb17b3f1d",
+      "answer": "Spring Boot 创建 `dataSource` Bean 失败时，需按以下步骤排查：\n\n1. 检查 `application.yml` 中的数据库连接配置（如 host、port、username、password、database name 等）是否正确 [来源: tech.md, 第 1 页]。  \n2. 确认数据库账号对目标数据库具有访问权限 [来源: tech.md, 第 1 页]。  \n3. 确认项目中已声明并引入正确的数据库驱动依赖（如 `mysql-connector-j`）[来源: tech.md, 第 1 页]。  \n4. 查看完整异常堆栈，重点关注最底层的 `Caused by` 信息，该信息通常指向根本原因（如认证失败、网络不可达、驱动类未找到等）[来源: tech.md, 第 1 页]。\n\n⚠️ 注意：若涉及生产环境配置变更或数据库权限调整，须严格遵循《生产变更管理流程》提交审批工单，不得擅自修改。",
+      "refused": false,
+      "confidence": "high",
+      "usage": {
+        "input_tokens": 770,
+        "output_tokens": 220,
+        "retrieval_run_id": "340b834d-f7d5-428b-9ab0-c01c543c7ffb",
+        "latency_ms": 6192,
+        "confidence_score": 0.774867,
+        "confidence_reason": "strong_evidence",
+        "evidence_count": 1,
+        "timings": {
+          "access_ms": 1,
+          "rewrite_ms": 0,
+          "search_ms": 199,
+          "embedding_ms": 192,
+          "milvus_ms": 7,
+          "rerank_input_count": 3,
+          "rerank_ms": 5993,
+          "retrieval_ms": 6192,
+          "citation_persistence_ms": 12,
+          "llm_first_token_ms": 1009,
+          "llm_total_ms": 5801,
+          "answer_total_ms": 12025
+        }
+      },
+      "citations": [
+        {
+          "id": "a4b8631d-cfb3-43d9-abab-569bc7d62b47",
+          "document_id": "38a94da0-af41-452a-8de0-5beab665ce03",
+          "document_name": "tech.md",
+          "document_type": "md",
+          "location_label": "第 1 页",
+          "chunk_id": "cf610156-efd8-4950-832b-cbb7e043d1bb",
+          "score": 0.96858,
+          "excerpt": "## 二、常见报错排查\n\n### MySQL 连接失败\n\n现象：应用启动时提示 `Can't connect to MySQL server` 或 `Connection refused`。\n\n排查步骤：\n\n1. 确认 MySQL 服务已启动。\n2. 确认配置文件中的 host、port、user、password 是否正确。\n3. 使用 `telnet 数据库地址 3306` 检查网络连通性。\n4. 确认数据库名已经创建。\n5. 如果使用容器部署，确认容器端口映射和防火墙放行。\n\n### Spring Boot Bean 创建失败\n\n现象：`Error creating bean with name 'dataSource'`。\n\n排查步骤：\n\n1. 检查 `application.yml` 中的数据库连接配置。\n2. 确认数据库账号有目标库的访问权限。\n3. 确认数据库驱动依赖存在。\n4. 查看完整堆栈最底层的 `Caused by` 信息。\n\n### Git 推送失败\n\n现象：`Permission denied (publickey)`。\n\n排查步骤：\n\n1. 确认本机已生成 SSH key：`ssh-keygen -t rsa -b 4096`。\n2. 将公钥添加到 GitLab / GitHub 账号的 SSH Keys 中。\n3. 使用 `ssh -T git@内部git地址` 测试连通性。\n4. 确认远程地址使用 SSH 协议。\n\n### 接口返回 503 Service Unavailable\n\n可能原因：\n\n- 上游服务未启动。\n- 服务线程池被打满。\n- 网关或负载均衡没有可用节点。\n- 服务正在发布或重启。\n\n排查顺序：先看服务健康检查，再看网关日志和服务日志，最后确认发布状态。\n\n## 三、接口调试\n\n### 常用接口调试步骤\n\n1. 从接口文档确认 URL、请求方法、请求头和参数。\n2. 先用 Postman 或 Apifox 发送最小可用请求。\n3. 再逐步加入业务参数。\n4. 出现 401 时优先检查 token 是否携带、是否过期。\n5. 出现 403 时确认账号是否有所需权限。\n\n### SSO Token 使用\n\n- 登录后前端在请求头携带 `Authorization: Bearer <token>`。\n- token 过期后",
+          "url": null
+        }
+      ],
+      "citation_source_precision": 1.0,
+      "term_coverage": 1.0,
+      "latency_ms": 12078
+    }
+  ]
+}

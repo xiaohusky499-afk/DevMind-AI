@@ -1,0 +1,27 @@
+# 统一换行符策略：仓库内一律存 LF，检出时按平台规则还原。
+# 目的是避免 Windows 开发者把脚本提交成 CRLF，导致 Linux 容器内执行报
+# `/bin/sh^M: bad interpreter`。
+* text=auto eol=lf
+
+# Shell / Docker 构建相关文件必须保持 LF，否则容器内无法执行。
+*.sh      text eol=lf
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+
+# Windows 批处理脚本需保留 CRLF，否则 cmd.exe 解析异常。
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+*.ps1     text eol=crlf
+
+# 二进制资源不做换行符转换，避免文件被损坏。
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.woff    binary
+*.woff2   binary
+*.ttf     binary
+*.zip     binary
+*.gz      binary
